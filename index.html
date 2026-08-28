@@ -3,964 +3,2542 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ستافی پرد | دروستکردنی ناوەڕۆکی پزیشکی</title>
 
-<!-- Fonts -->
+<title>پرد | PRD.CC</title>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-<!-- Tailwind CSS CDN -->
-<script src="https://cdn.tailwindcss.com"></script>
-
-<!-- Font Awesome Icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-<!-- Three.js Library -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-
 <style>
-  :root {
-    --bg-main: #eaf3fa;
-    --bg-alt: #e2eef8;
-    --card-bg: rgba(255, 255, 255, 0.92);
-    --card-inner-bg: rgba(255, 255, 255, 0.8);
-    --input-bg: #f4f8fc;
-    --input-border: #cbd5e1;
-    --text-main: #0d2137;
-    --text-muted: #475569;
-    --text-gold: #996515;
-    --border-color: rgba(179, 125, 20, 0.25);
-    --footer-bg: #dce9f5;
-    --bridge-stroke: #0d2137;
-    --bridge-traveler: #0d2137;
+
+:root{
+  --gold:#e5b83f;
+  --gold-light:#f5d66c;
+  --sky:#69c9ef;
+  --purple:#d9c8ee;
+
+  --bg:#08061a;
+  --bg2:#110b29;
+  --card:rgba(255,255,255,.07);
+  --text:#ffffff;
+  --muted:#bdb7cc;
+  --border:rgba(255,255,255,.11);
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  font-family:"Vazirmatn",sans-serif;
+  color:var(--text);
+
+  background:
+    radial-gradient(circle at 80% 0%,rgba(105,201,239,.14),transparent 28%),
+    radial-gradient(circle at 10% 20%,rgba(217,200,238,.10),transparent 25%),
+    linear-gradient(145deg,var(--bg),var(--bg2));
+
+  line-height:1.9;
+  overflow-x:hidden;
+}
+
+body.light{
+  --bg:#f8f8fc;
+  --bg2:#eef9fd;
+  --card:rgba(255,255,255,.72);
+  --text:#171423;
+  --muted:#6b6676;
+  --border:rgba(20,15,40,.10);
+}
+
+a{
+  text-decoration:none;
+  color:inherit;
+}
+
+.container{
+  width:min(1180px,92%);
+  margin:auto;
+}
+
+.glass{
+  background:var(--card);
+  border:1px solid var(--border);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  box-shadow:0 25px 80px rgba(0,0,0,.22);
+}
+
+/* ================= NAVBAR ================= */
+
+header{
+  position:fixed;
+  top:15px;
+  left:0;
+  right:0;
+  z-index:1000;
+}
+
+.nav{
+  width:min(1140px,92%);
+  margin:auto;
+
+  padding:10px 14px;
+
+  border-radius:22px;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+
+  font-size:24px;
+  font-weight:900;
+}
+
+.logoMark{
+  width:44px;
+  height:44px;
+
+  border-radius:14px;
+
+  display:grid;
+  place-items:center;
+
+  color:#241a06;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--gold-light),
+      var(--gold)
+    );
+
+  box-shadow:
+    0 10px 35px rgba(229,184,63,.25);
+}
+
+.logoMark img,
+.profileLogo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  border-radius:inherit;
+  display:block;
+}
+
+.navLinks{
+  display:flex;
+  gap:25px;
+
+  font-size:13px;
+  font-weight:700;
+
+  color:var(--muted);
+}
+
+.navLinks a{
+  transition:.25s;
+}
+
+.navLinks a:hover{
+  color:var(--gold-light);
+}
+
+.navRight{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.theme{
+  width:43px;
+  height:43px;
+
+  border-radius:13px;
+
+  border:1px solid var(--border);
+
+  background:var(--card);
+
+  color:var(--text);
+
+  cursor:pointer;
+
+  font-size:18px;
+}
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+
+  padding:13px 20px;
+
+  border-radius:14px;
+
+  font-size:13px;
+  font-weight:900;
+
+  transition:.3s;
+}
+
+.btn:hover{
+  transform:translateY(-3px);
+}
+
+.btnGold{
+  background:
+    linear-gradient(
+      135deg,
+      var(--gold-light),
+      var(--gold)
+    );
+
+  color:#302306;
+
+  box-shadow:
+    0 12px 35px rgba(229,184,63,.23);
+}
+
+.btnSky{
+  background:
+    linear-gradient(
+      135deg,
+      #77d7fa,
+      #3c91df
+    );
+
+  color:white;
+}
+
+/* ================= HERO ================= */
+
+.hero{
+  min-height:900px;
+
+  padding:
+    160px 0 80px;
+
+  position:relative;
+}
+
+.heroGrid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+
+  gap:50px;
+
+  align-items:center;
+}
+
+.eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+
+  padding:7px 13px;
+
+  border-radius:999px;
+
+  color:var(--gold-light);
+
+  background:rgba(229,184,63,.08);
+
+  border:1px solid rgba(229,184,63,.18);
+
+  font-size:12px;
+  font-weight:800;
+
+  margin-bottom:18px;
+}
+
+.dot{
+  width:8px;
+  height:8px;
+
+  border-radius:50%;
+
+  background:var(--sky);
+
+  box-shadow:
+    0 0 0 8px rgba(105,201,239,.10);
+
+  animation:pulse 1.7s infinite;
+}
+
+@keyframes pulse{
+
+  50%{
+    box-shadow:
+      0 0 0 15px transparent;
   }
 
-  body.dark-mode {
-    --bg-main: #040814;
-    --bg-alt: #020611;
-    --card-bg: rgba(11, 20, 44, 0.9);
-    --card-inner-bg: rgba(2, 5, 14, 0.75);
-    --input-bg: #02050e;
-    --input-border: rgba(246, 200, 95, 0.3);
-    --text-main: #f8fafc;
-    --text-muted: #cbd5e1;
-    --text-gold: #f6c85f;
-    --border-color: rgba(246, 200, 95, 0.25);
-    --footer-bg: #010309;
-    --bridge-stroke: #f6c85f;
-    --bridge-traveler: #f6c85f;
+}
+
+h1{
+  font-size:clamp(43px,6vw,72px);
+
+  line-height:1.12;
+
+  letter-spacing:-2.5px;
+
+  margin-bottom:22px;
+}
+
+.gradient{
+  background:
+    linear-gradient(
+      90deg,
+      var(--gold-light),
+      var(--sky),
+      var(--purple)
+    );
+
+  -webkit-background-clip:text;
+  background-clip:text;
+
+  color:transparent;
+}
+
+.heroText{
+  max-width:620px;
+
+  color:var(--muted);
+
+  font-size:17px;
+
+  margin-bottom:28px;
+}
+
+.heroButtons{
+  display:flex;
+  gap:11px;
+
+  flex-wrap:wrap;
+}
+
+.trust{
+  display:flex;
+  gap:20px;
+
+  flex-wrap:wrap;
+
+  color:var(--muted);
+
+  font-size:12px;
+
+  margin-top:24px;
+}
+
+/* ================= HERO VISUAL ================= */
+
+.visual{
+  min-height:560px;
+
+  position:relative;
+}
+
+.phone{
+  position:absolute;
+
+  right:50px;
+  top:15px;
+
+  width:290px;
+  height:530px;
+
+  padding:9px;
+
+  border-radius:38px;
+
+  background:#050509;
+
+  box-shadow:
+    0 40px 100px rgba(0,0,0,.55);
+
+  transform:rotate(5deg);
+
+  z-index:5;
+
+  animation:phoneFloat 5s ease-in-out infinite;
+}
+
+@keyframes phoneFloat{
+
+  50%{
+    transform:
+      rotate(2deg)
+      translateY(-12px);
   }
 
-  * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body {
-    font-family: 'Vazirmatn', sans-serif;
-    background-color: var(--bg-main);
-    color: var(--text-main);
-    overflow-x: hidden;
-    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.phoneScreen{
+  width:100%;
+  height:100%;
+
+  overflow:hidden;
+
+  border-radius:31px;
+
+  background:#f7f7fb;
+
+  color:#171426;
+
+  padding:18px;
+}
+
+.profile{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  font-size:10px;
+}
+
+.profileLogo{
+  width:34px;
+  height:34px;
+
+  border-radius:10px;
+
+  display:grid;
+  place-items:center;
+
+  font-weight:900;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ffd85d,
+      #e4a72e
+    );
+}
+
+.profileHero{
+  margin-top:20px;
+
+  border-radius:21px;
+
+  padding:18px;
+
+  min-height:175px;
+
+  color:white;
+
+  background:
+    linear-gradient(
+      145deg,
+      #17113c,
+      #49428c
+    );
+
+  position:relative;
+
+  overflow:hidden;
+}
+
+.profileHero:after{
+  content:"";
+
+  position:absolute;
+
+  width:170px;
+  height:170px;
+
+  border-radius:50%;
+
+  border:1px solid rgba(255,255,255,.22);
+
+  left:-50px;
+  bottom:-80px;
+}
+
+.profileHero small{
+  opacity:.7;
+}
+
+.profileHero h3{
+  font-size:21px;
+
+  line-height:1.4;
+
+  margin-top:27px;
+}
+
+.reels{
+  display:grid;
+
+  grid-template-columns:1fr 1fr;
+
+  gap:9px;
+
+  margin-top:10px;
+}
+
+.reel{
+  height:103px;
+
+  border-radius:15px;
+
+  position:relative;
+
+  overflow:hidden;
+
+  background:
+    linear-gradient(
+      145deg,
+      #dff5ff,
+      #d9c8ee
+    );
+}
+
+.reel:nth-child(2){
+  background:
+    linear-gradient(
+      145deg,
+      #e8d7ad,
+      #a9ddf4
+    );
+}
+
+.reel:nth-child(3){
+  background:
+    linear-gradient(
+      145deg,
+      #b9dff0,
+      #eadcf4
+    );
+}
+
+.reel:nth-child(4){
+  background:
+    linear-gradient(
+      145deg,
+      #f3e5bc,
+      #c7b4e1
+    );
+}
+
+.play{
+  position:absolute;
+
+  bottom:9px;
+  left:9px;
+
+  width:29px;
+  height:29px;
+
+  border-radius:50%;
+
+  display:grid;
+  place-items:center;
+
+  background:rgba(0,0,0,.65);
+
+  color:white;
+
+  font-size:11px;
+}
+
+/* floating */
+
+.floating{
+  position:absolute;
+
+  padding:10px 14px;
+
+  border-radius:999px;
+
+  font-size:10px;
+
+  font-weight:900;
+
+  z-index:10;
+
+  animation:float 4s ease-in-out infinite;
+}
+
+.f1{
+  right:0;
+  top:90px;
+
+  color:var(--gold-light);
+}
+
+.f2{
+  left:0;
+  top:230px;
+
+  color:var(--sky);
+
+  animation-delay:1s;
+}
+
+.f3{
+  right:35px;
+  bottom:20px;
+
+  color:var(--purple);
+
+  animation-delay:2s;
+}
+
+@keyframes float{
+
+  50%{
+    transform:
+      translateY(-10px);
   }
 
-  /* 3D Canvas Box بە ڕێکخستنی touch-action بۆ ڕێگریکردن لە وەستاندنی سکرۆڵ */
-  .canvas-3d-box {
-    width: 100%;
-    cursor: grab;
-    touch-action: pan-y;
-    position: relative;
-    overflow: hidden;
-    will-change: transform;
-  }
-  .canvas-3d-box:active { cursor: grabbing; }
+}
 
-  .theme-card {
-    background: var(--card-bg);
-    backdrop-filter: blur(10px);
-    border: 1.5px solid var(--border-color);
-    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.08);
-    transition: all 0.25s ease;
-  }
-  .theme-card:hover {
-    border-color: rgba(217, 119, 6, 0.6);
-    box-shadow: 0 12px 30px -8px rgba(217, 119, 6, 0.2);
+/* orbital animation */
+
+.orbit{
+  position:absolute;
+
+  width:420px;
+  height:420px;
+
+  border-radius:50%;
+
+  border:
+    1px solid
+    rgba(229,184,63,.35);
+
+  right:0;
+  top:70px;
+
+  animation:
+    spin 20s linear infinite;
+}
+
+.orbit:before,
+.orbit:after{
+  content:"";
+
+  position:absolute;
+
+  width:10px;
+  height:10px;
+
+  border-radius:50%;
+
+  background:var(--gold);
+
+  box-shadow:
+    0 0 25px var(--gold);
+}
+
+.orbit:before{
+  top:45px;
+  right:55px;
+}
+
+.orbit:after{
+  bottom:30px;
+  left:55px;
+
+  background:var(--sky);
+}
+
+.orbit2{
+  position:absolute;
+
+  width:500px;
+  height:500px;
+
+  border-radius:50%;
+
+  border:
+    1px dashed
+    rgba(105,201,239,.25);
+
+  right:-40px;
+  top:30px;
+
+  animation:
+    spinReverse 28s linear infinite;
+}
+
+@keyframes spin{
+
+  to{
+    transform:rotate(360deg);
   }
 
-  .featured-card {
-    background: var(--card-bg);
-    border: 2.5px solid #d97706;
-    box-shadow: 0 15px 35px -10px rgba(217, 119, 6, 0.25);
+}
+
+@keyframes spinReverse{
+
+  to{
+    transform:rotate(-360deg);
   }
 
-  .gold-title { color: var(--text-gold); }
+}
 
-  /* 2D Bridge Animations */
-  .traveler { animation: cross 6.5s ease-in-out infinite; }
-  .traveler.t2 { animation-delay: 1.6s; }
-  .traveler.t3 { animation-delay: 3.2s; }
-  .traveler.t4 { animation-delay: 4.8s; }
+/* ================= GENERAL ================= */
 
-  @keyframes cross {
-    0%   { transform: translate(140px, 45px) scale(0.7); opacity: 0; }
-    10%  { opacity: 1; }
-    50%  { transform: translate(0px, -10px) scale(1.15); }
-    90%  { opacity: 1; }
-    100% { transform: translate(-140px, 45px) scale(0.7); opacity: 0; }
+section{
+  padding:90px 0;
+}
+
+.sectionHead{
+  text-align:center;
+
+  max-width:730px;
+
+  margin:
+    0 auto 42px;
+}
+
+.sectionHead h2{
+  font-size:
+    clamp(30px,4vw,47px);
+
+  line-height:1.3;
+
+  margin-bottom:10px;
+}
+
+.sectionHead p{
+  color:var(--muted);
+
+  font-size:14px;
+}
+
+/* ================= STATS ================= */
+
+.stats{
+  display:grid;
+
+  grid-template-columns:
+    repeat(4,1fr);
+
+  gap:14px;
+}
+
+.stat{
+  padding:22px;
+
+  border-radius:22px;
+
+  text-align:center;
+}
+
+.stat strong{
+  display:block;
+
+  font-size:30px;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--gold-light),
+      var(--sky)
+    );
+
+  -webkit-background-clip:text;
+
+  color:transparent;
+}
+
+.stat span{
+  color:var(--muted);
+
+  font-size:12px;
+}
+
+/* ================= SERVICES ================= */
+
+.services{
+  display:grid;
+
+  grid-template-columns:
+    repeat(3,1fr);
+
+  gap:17px;
+}
+
+.service{
+  padding:26px;
+
+  border-radius:24px;
+
+  transition:.35s;
+}
+
+.service:hover{
+  transform:
+    translateY(-8px);
+
+  border-color:
+    rgba(229,184,63,.3);
+}
+
+.icon{
+  width:53px;
+  height:53px;
+
+  border-radius:16px;
+
+  display:grid;
+  place-items:center;
+
+  font-size:21px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(229,184,63,.15),
+      rgba(105,201,239,.13)
+    );
+
+  color:var(--gold-light);
+
+  margin-bottom:16px;
+}
+
+.service h3{
+  font-size:18px;
+
+  margin-bottom:7px;
+}
+
+.service p{
+  color:var(--muted);
+
+  font-size:13px;
+}
+
+/* ================= PORTFOLIO ================= */
+
+.portfolio{
+  display:grid;
+
+  grid-template-columns:
+    1.2fr .8fr .8fr;
+
+  gap:16px;
+}
+
+.work{
+  border-radius:25px;
+
+  overflow:hidden;
+
+  transition:.35s;
+}
+
+.work:hover{
+  transform:
+    translateY(-8px);
+}
+
+.workArt{
+  height:280px;
+
+  position:relative;
+
+  display:grid;
+
+  place-items:center;
+
+  overflow:hidden;
+}
+
+.work:nth-child(1)
+.workArt{
+  background:
+    linear-gradient(
+      145deg,
+      #101c35,
+      #39647e,
+      #e0ca91
+    );
+}
+
+.work:nth-child(2)
+.workArt{
+  background:
+    linear-gradient(
+      145deg,
+      #e7f8ff,
+      #d9c8ef
+    );
+}
+
+.work:nth-child(3)
+.workArt{
+  background:
+    linear-gradient(
+      145deg,
+      #1c1435,
+      #7c5da1
+    );
+}
+
+.workArt:before{
+  content:"";
+
+  position:absolute;
+
+  width:220px;
+  height:220px;
+
+  border-radius:50%;
+
+  border:
+    1px solid
+    rgba(255,255,255,.25);
+
+  animation:
+    spin 15s linear infinite;
+}
+
+.workText{
+  position:relative;
+
+  z-index:2;
+
+  text-align:center;
+
+  font-size:36px;
+
+  font-weight:900;
+
+  color:white;
+
+  text-shadow:
+    0 8px 30px rgba(0,0,0,.4);
+}
+
+.workInfo{
+  padding:17px 19px;
+
+  display:flex;
+
+  justify-content:space-between;
+
+  gap:10px;
+}
+
+.workInfo b{
+  font-size:14px;
+}
+
+.workInfo span{
+  color:var(--muted);
+
+  font-size:11px;
+}
+
+/* ================= PACKAGES ================= */
+
+.packages{
+  display:grid;
+
+  grid-template-columns:
+    repeat(3,1fr);
+
+  gap:17px;
+}
+
+.package{
+  padding:28px;
+
+  border-radius:27px;
+
+  display:flex;
+
+  flex-direction:column;
+
+  position:relative;
+}
+
+.package.featured{
+  border:
+    1px solid
+    rgba(229,184,63,.5);
+
+  box-shadow:
+    0 30px 80px
+    rgba(229,184,63,.11);
+
+  transform:
+    translateY(-9px);
+}
+
+.badge{
+  position:absolute;
+
+  top:16px;
+  left:17px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--gold-light),
+      var(--gold)
+    );
+
+  color:#392b08;
+
+  padding:6px 10px;
+
+  border-radius:999px;
+
+  font-size:10px;
+
+  font-weight:900;
+}
+
+.package h3{
+  font-size:22px;
+}
+
+.subtitle{
+  color:var(--muted);
+
+  font-size:12px;
+
+  margin-bottom:20px;
+}
+
+.package ul{
+  list-style:none;
+
+  display:grid;
+
+  gap:10px;
+
+  margin-bottom:23px;
+
+  flex:1;
+}
+
+.package li{
+  display:flex;
+
+  gap:8px;
+
+  font-size:12.5px;
+}
+
+.check{
+  color:var(--gold-light);
+
+  font-weight:900;
+}
+
+.note{
+  margin-top:18px;
+
+  padding:15px;
+
+  border-radius:15px;
+
+  text-align:center;
+
+  color:var(--muted);
+
+  font-size:11px;
+
+  border:
+    1px solid
+    rgba(229,184,63,.2);
+
+  background:
+    rgba(229,184,63,.06);
+}
+
+/* ================= PROCESS ================= */
+
+.process{
+  display:grid;
+
+  grid-template-columns:
+    repeat(4,1fr);
+
+  gap:14px;
+}
+
+.step{
+  padding:23px;
+
+  border-radius:22px;
+}
+
+.number{
+  color:var(--gold-light);
+
+  font-size:12px;
+
+  font-weight:900;
+}
+
+.step h3{
+  margin:6px 0;
+}
+
+.step p{
+  color:var(--muted);
+
+  font-size:12px;
+}
+
+/* ================= TESTIMONIAL ================= */
+
+.testimonials{
+  display:grid;
+
+  grid-template-columns:
+    repeat(2,1fr);
+
+  gap:17px;
+}
+
+.quote{
+  padding:27px;
+
+  border-radius:25px;
+}
+
+.stars{
+  color:var(--gold-light);
+
+  letter-spacing:3px;
+
+  margin-bottom:12px;
+}
+
+.quote p{
+  font-size:14px;
+}
+
+.person{
+  display:flex;
+
+  align-items:center;
+
+  gap:10px;
+
+  margin-top:18px;
+}
+
+.avatar{
+  width:43px;
+  height:43px;
+
+  border-radius:50%;
+
+  display:grid;
+  place-items:center;
+
+  color:#21182d;
+
+  font-weight:900;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--sky),
+      var(--purple)
+    );
+}
+
+.person small{
+  display:block;
+
+  color:var(--muted);
+
+  font-size:10px;
+}
+
+/* ================= CTA ================= */
+
+.cta{
+  padding:50px;
+
+  border-radius:32px;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  gap:25px;
+
+  border:
+    1px solid
+    rgba(229,184,63,.18);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(229,184,63,.09),
+      rgba(105,201,239,.08),
+      rgba(217,200,238,.08)
+    );
+}
+
+.cta h2{
+  font-size:
+    clamp(28px,4vw,43px);
+
+  line-height:1.3;
+}
+
+.cta p{
+  color:var(--muted);
+
+  font-size:13px;
+
+  margin-top:7px;
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+  padding:
+    45px 0 25px;
+
+  border-top:
+    1px solid var(--border);
+}
+
+.footerGrid{
+  display:flex;
+
+  justify-content:space-between;
+
+  gap:30px;
+}
+
+.footerBrand p{
+  max-width:430px;
+
+  color:var(--muted);
+
+  font-size:12px;
+
+  margin-top:10px;
+}
+
+.socials{
+  display:flex;
+
+  gap:8px;
+
+  margin-top:15px;
+}
+
+.socials a{
+  width:40px;
+  height:40px;
+
+  border-radius:12px;
+
+  display:grid;
+  place-items:center;
+
+  background:var(--card);
+
+  border:
+    1px solid var(--border);
+
+  color:var(--gold-light);
+}
+
+.footerLinks{
+  display:flex;
+
+  gap:28px;
+
+  color:var(--muted);
+
+  font-size:12px;
+}
+
+.copy{
+  text-align:center;
+
+  border-top:
+    1px solid var(--border);
+
+  margin-top:28px;
+
+  padding-top:18px;
+
+  color:var(--muted);
+
+  font-size:10px;
+}
+
+/* ================= ANIMATION ================= */
+
+.reveal{
+  opacity:0;
+
+  transform:
+    translateY(25px);
+
+  transition:
+    .8s ease;
+}
+
+.reveal.show{
+  opacity:1;
+
+  transform:none;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:950px){
+
+  .navLinks{
+    display:none;
   }
+
+  .heroGrid{
+    grid-template-columns:1fr;
+
+    text-align:center;
+  }
+
+  .heroText{
+    margin:auto auto 28px;
+  }
+
+  .heroButtons,
+  .trust{
+    justify-content:center;
+  }
+
+  .visual{
+    min-height:570px;
+  }
+
+  .stats{
+    grid-template-columns:
+      repeat(2,1fr);
+  }
+
+  .services,
+  .portfolio,
+  .packages{
+    grid-template-columns:1fr;
+  }
+
+  .package.featured{
+    transform:none;
+  }
+
+  .process{
+    grid-template-columns:
+      repeat(2,1fr);
+  }
+
+  .cta{
+    flex-direction:column;
+
+    text-align:center;
+  }
+
+  .footerGrid{
+    flex-direction:column;
+  }
+}
+
+@media(max-width:560px){
+
+  .hero{
+    padding-top:135px;
+  }
+
+  .phone{
+    right:15px;
+
+    width:260px;
+
+    height:500px;
+  }
+
+  .orbit{
+    width:350px;
+    height:350px;
+
+    right:-20px;
+  }
+
+  .orbit2{
+    width:410px;
+    height:410px;
+
+    right:-50px;
+  }
+
+  .floating{
+    display:none;
+  }
+
+  .stats{
+    gap:9px;
+  }
+
+  .stat{
+    padding:17px 8px;
+  }
+
+  .process,
+  .testimonials{
+    grid-template-columns:1fr;
+  }
+
+  .cta{
+    padding:32px 21px;
+  }
+
+  .footerLinks{
+    flex-wrap:wrap;
+  }
+
+}
+
 </style>
 </head>
-<body class="selection:bg-amber-400 selection:text-slate-950">
-
-  <!-- سەرپەڕە (Navbar) -->
-  <header class="sticky top-0 z-50 bg-[var(--bg-main)]/95 backdrop-blur-md border-b border-amber-600/15 transition-colors duration-300">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3.5 flex justify-between items-center">
-      
-      <a href="#" class="flex items-center gap-2.5 text-xl sm:text-2xl font-black tracking-tight">
-        <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center text-white shadow-md shadow-amber-500/20">
-          <i class="fa-solid fa-staff-snake text-lg sm:text-xl"></i>
-        </div>
-        <span class="gold-title font-black" data-i18n="logo_title">ستافی پرد</span>
-        <span class="text-[11px] bg-amber-500/15 border border-amber-500/30 text-amber-600 px-2 py-0.5 rounded-full font-bold">prd.cc</span>
-      </a>
-
-      <nav class="hidden md:flex items-center gap-7 font-bold text-sm" style="color: var(--text-muted);">
-        <a href="#about" class="hover:text-amber-500 transition" data-i18n="nav_about">دەربارە</a>
-        <a href="#packages" class="hover:text-amber-500 transition" data-i18n="nav_packages">ئۆفەرەکان</a>
-        <a href="#portfolio" class="hover:text-amber-500 transition" data-i18n="nav_portfolio">نمونەی کارەکان</a>
-        <a href="#contact" class="hover:text-amber-500 transition" data-i18n="nav_contact">داواکاری</a>
-      </nav>
-
-      <div class="flex items-center gap-2 sm:gap-3">
-        <!-- دوگمەی زمان -->
-        <button id="lang-toggle" class="h-9 px-2.5 sm:px-3 rounded-xl border border-amber-500/30 bg-amber-500/10 hover:bg-amber-500/20 text-amber-500 flex items-center gap-1.5 text-xs font-black transition" title="Switch Language">
-          <i class="fa-solid fa-globe"></i>
-          <span id="lang-label">English</span>
-        </button>
-
-        <!-- دوگمەی دارک مۆد -->
-        <button id="theme-toggle" class="w-9 h-9 rounded-xl border border-amber-500/30 bg-amber-500/10 hover:bg-amber-500/20 text-amber-500 flex items-center justify-center text-base transition" title="گۆڕینی دۆخ">
-          <i id="theme-icon" class="fa-solid fa-moon"></i>
-        </button>
-
-        <a href="https://wa.me/9647729628611" target="_blank" class="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-black px-3.5 sm:px-5 py-2 rounded-xl transition shadow-md shadow-amber-500/20 flex items-center gap-1.5 text-xs sm:text-sm">
-          <i class="fa-brands fa-whatsapp text-sm sm:text-base"></i>
-          <span data-i18n="nav_cta">پەیوەندی</span>
-        </a>
-      </div>
-
-    </div>
-  </header>
-
-  <!-- بەشی سەرەکی (Hero Section) -->
-  <section class="relative py-12 sm:py-16 lg:py-20 overflow-hidden">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-      
-      <div class="lg:col-span-7 text-center lg:text-right flex flex-col items-center lg:items-start" id="hero-text-container">
-        <div class="inline-flex items-center gap-2 bg-amber-500/15 border border-amber-600/30 text-amber-600 text-xs font-bold px-3.5 py-1.5 rounded-full mb-5">
-          <i class="fa-solid fa-sparkles text-amber-500"></i>
-          <span data-i18n="hero_eyebrow">ستافی پرد بۆ دروستکردنی ناوەڕۆکی پزیشکی</span>
-        </div>
-        
-        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black leading-tight mb-5">
-          <span data-i18n="hero_h1_part1">ئێمە دەبینە</span> <span class="gold-title" data-i18n="hero_h1_highlight">پردی پەیوەندی</span> <span data-i18n="hero_h1_part2">نێوان نەخۆش و پزیشکەکان</span>
-        </h1>
-        
-        <p class="text-sm sm:text-base leading-relaxed mb-4 max-w-xl text-center lg:text-right" style="color: var(--text-muted);" data-i18n="hero_description">
-          ئێمە لە prd.cc بەرهەمهێنان و بەڕێوەبردنی سۆشیال میدیای ناوەندە پزیشکییەکان لە ئەستۆ دەگرین بە کوالێتی بەرز و ڕێگەی زانستی کە متمانەی نەخۆشەکانت زیاد دەکات.
-        </p>
-
-        <div class="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-amber-500/15 via-amber-500/5 to-transparent border-r-4 border-amber-500 px-3.5 py-2 rounded-l-xl text-xs sm:text-sm font-bold gold-title mb-6 shadow-sm text-center">
-          <i class="fa-solid fa-user-doctor text-amber-500 text-base"></i>
-          <span data-i18n="hero_staff_badge">هەموو کارەکانمان لەلایەن ستافێکی شارەزای پزیشکان و پەرستارانەوە ئەکرێت</span>
-        </div>
-
-        <div class="flex flex-wrap justify-center lg:justify-start gap-3.5 mb-8 w-full" id="hero-actions">
-          <a href="#packages" class="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-black px-6 sm:px-8 py-3 rounded-xl transition shadow-lg shadow-amber-500/25 flex items-center gap-2 text-sm">
-            <i class="fa-solid fa-layer-group"></i>
-            <span data-i18n="btn_view_packages">بینینی ئۆفەرەکان</span>
-          </a>
-          <a href="#contact" class="theme-card hover:border-amber-500 gold-title font-bold px-6 sm:px-8 py-3 rounded-xl transition flex items-center gap-2 shadow-sm text-sm">
-            <i class="fa-solid fa-paper-plane"></i>
-            <span data-i18n="btn_request_offer">داواکاری ئۆفەر</span>
-          </a>
-        </div>
-
-        <div class="grid grid-cols-3 gap-3 pt-5 border-t border-amber-500/20 text-center w-full" id="hero-stats">
-          <div>
-            <b class="block text-xl sm:text-2xl font-black gold-title" data-i18n="stat_1_num">٣ ئاست</b>
-            <span class="text-[11px] sm:text-xs" style="color: var(--text-muted);" data-i18n="stat_1_sub">ئۆفەری مانگانە</span>
-          </div>
-          <div>
-            <b class="block text-xl sm:text-2xl font-black gold-title" data-i18n="stat_2_num">تەواوکار</b>
-            <span class="text-[11px] sm:text-xs" style="color: var(--text-muted);" data-i18n="stat_2_sub">تۆمار، ئیدیت و مۆشن</span>
-          </div>
-          <div>
-            <b class="block text-xl sm:text-2xl font-black gold-title" data-i18n="stat_3_num">زانستی</b>
-            <span class="text-[11px] sm:text-xs" style="color: var(--text-muted);" data-i18n="stat_3_sub">بۆ دروستکردنی متمانە</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- گرافیکی پردی ۲D لە سەنتەردا -->
-      <div class="lg:col-span-5 max-w-md mx-auto w-full">
-        <div class="theme-card rounded-2xl sm:rounded-3xl p-5 sm:p-6 shadow-lg">
-          <div class="flex justify-between items-center text-xs font-bold border-b border-amber-500/20 pb-3 mb-3">
-            <span class="flex items-center gap-1.5 gold-title"><i class="fa-solid fa-user-injured text-amber-500"></i> <span data-i18n="bridge_patient">نەخۆش</span></span>
-            <span class="font-mono text-[11px]" style="color: var(--text-muted);">prd.cc</span>
-            <span class="flex items-center gap-1.5 gold-title"><span data-i18n="bridge_doctors">پزیشک • دەرمانخانە</span> <i class="fa-solid fa-user-doctor text-amber-500"></i></span>
-          </div>
-
-          <div class="py-2">
-            <svg viewBox="0 0 420 200" width="100%" class="drop-shadow-sm">
-              <path d="M20 150 Q210 25 400 150" stroke="var(--bridge-stroke)" stroke-width="4" fill="none" stroke-linecap="round"/>
-              <g stroke="#b37d14" stroke-width="2" opacity="0.6">
-                <line x1="60" y1="138" x2="70" y2="100"/>
-                <line x1="110" y1="110" x2="115" y2="72"/>
-                <line x1="160" y1="85" x2="163" y2="50"/>
-                <line x1="210" y1="72" x2="210" y2="38"/>
-                <line x1="260" y1="85" x2="257" y2="50"/>
-                <line x1="310" y1="110" x2="305" y2="72"/>
-                <line x1="360" y1="138" x2="350" y2="100"/>
-              </g>
-              <rect x="10" y="146" width="55" height="12" rx="3" fill="var(--bridge-stroke)"/>
-              <rect x="355" y="146" width="55" height="12" rx="3" fill="#b37d14"/>
-
-              <g class="traveler"><circle cx="210" cy="65" r="9" fill="#d97706"/></g>
-              <g class="traveler t2"><circle cx="210" cy="65" r="7" fill="var(--bridge-traveler)"/></g>
-              <g class="traveler t3"><circle cx="210" cy="65" r="8" fill="#b37d14"/></g>
-              <g class="traveler t4"><circle cx="210" cy="65" r="6" fill="#f59e0b"/></g>
-            </svg>
-          </div>
-
-          <div class="mt-3 p-2.5 rounded-xl border border-amber-500/20 text-center shadow-sm" style="background: var(--card-inner-bg);">
-            <p class="text-[11px] sm:text-xs font-medium flex items-center justify-center gap-1.5" style="color: var(--text-muted);">
-              <i class="fa-solid fa-arrows-spin text-amber-500 animate-spin"></i>
-              <span data-i18n="bridge_flow_note">گواستنەوەی بەردەوامی زانیارییەکان لە ڕێگەی پردی متمانەوە</span>
-            </p>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- بەشی تایبەتمەندییەکان -->
-  <section id="about" class="py-16 sm:py-20 border-y border-amber-600/15" style="background-color: var(--bg-alt);">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6">
-      <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
-        <span class="text-xs font-bold bg-amber-500/15 border border-amber-600/30 text-amber-600 px-3 py-1 rounded-full" data-i18n="about_eyebrow">تایبەتمەندییەکان</span>
-        <h2 class="text-2xl sm:text-3xl lg:text-4xl font-black mt-3 mb-2" data-i18n="about_h2">بۆچی ستافی پرد هەڵدەبژێریت؟</h2>
-        <p class="text-xs sm:text-sm" style="color: var(--text-muted);" data-i18n="about_sub">بە دەست لێدان کارلێک لەگەڵ مۆدێلە 3Dیە ئاڵتونییەکان بکە</p>
-      </div>
-
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-md sm:max-w-none mx-auto">
-        
-        <div class="theme-card rounded-2xl sm:rounded-3xl p-6 flex flex-col items-center text-center">
-          <div id="dna-3d" class="canvas-3d-box h-36 sm:h-40 rounded-xl mb-4 border border-amber-600/20" style="background: var(--card-inner-bg);"></div>
-          <h3 class="text-lg sm:text-xl font-bold gold-title mb-2" data-i18n="feat_1_title">کوالێتی زانستی بەرز</h3>
-          <p class="text-xs sm:text-sm leading-relaxed" style="color: var(--text-muted);" data-i18n="feat_1_desc">بەرهەمهێنانی ناوەڕۆک بەپێی نوێترین ستانداردە پزیشکی و زانستییەکان بەبێ زیادەڕۆیی.</p>
-        </div>
-
-        <div class="featured-card rounded-2xl sm:rounded-3xl p-6 flex flex-col items-center text-center">
-          <div id="cross-3d" class="canvas-3d-box h-36 sm:h-40 rounded-xl mb-4 border border-amber-500/30" style="background: var(--card-inner-bg);"></div>
-          <h3 class="text-lg sm:text-xl font-bold gold-title mb-2" data-i18n="feat_2_title">پردی متمانەی نەخۆش</h3>
-          <p class="text-xs sm:text-sm leading-relaxed" style="color: var(--text-muted);" data-i18n="feat_2_desc">دروستکردنی پەیوەندییەکی ڕاستەقینە لە نێوان نەخۆش و پزیشک، کلینیک و دەرمانخانەکان.</p>
-        </div>
-
-        <div class="theme-card rounded-2xl sm:rounded-3xl p-6 flex flex-col items-center text-center sm:col-span-2 lg:col-span-1 max-w-md sm:max-w-none mx-auto w-full">
-          <div id="growth-3d" class="canvas-3d-box h-36 sm:h-40 rounded-xl mb-4 border border-amber-600/20" style="background: var(--card-inner-bg);"></div>
-          <h3 class="text-lg sm:text-xl font-bold gold-title mb-2" data-i18n="feat_3_title">گەشە و سپۆنسەرینگ</h3>
-          <p class="text-xs sm:text-sm leading-relaxed" style="color: var(--text-muted);" data-i18n="feat_3_desc">سەرپەرشتی سپۆنسەر و ڕاپۆرتی ئاماری مانگانە بۆ پەیج.</p>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- بەشی نرخ و ئۆفەرەکان -->
-  <section id="packages" class="py-16 sm:py-20 lg:py-24">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6">
-      <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
-        <span class="text-xs font-bold bg-amber-500/15 border border-amber-600/30 text-amber-600 px-3 py-1 rounded-full" data-i18n="packages_eyebrow">ئۆفەرەکان</span>
-        <h2 class="text-2xl sm:text-4xl lg:text-5xl font-black mt-3 mb-2" data-i18n="packages_h2">ئۆفەرە مانگانەکانمان</h2>
-        <p class="text-xs sm:text-sm" style="color: var(--text-muted);" data-i18n="packages_sub">پاکێجی گونجاو بۆ ناوەندە پزیشکییەکەت دیاری بکە</p>
-      </div>
-
-      <div class="grid lg:grid-cols-3 gap-6 sm:gap-8 items-stretch max-w-md lg:max-w-none mx-auto">
-        
-        <!-- 1. ئۆفەری سەرەتایی -->
-        <div class="theme-card rounded-2xl sm:rounded-3xl p-6 sm:p-7 flex flex-col justify-between">
-          <div>
-            <div id="pack-starter-3d" class="canvas-3d-box h-24 rounded-xl mb-3 border border-amber-600/20" style="background: var(--card-inner-bg);"></div>
-            <span class="text-xs font-bold bg-amber-500/15 border border-amber-600/30 text-amber-600 px-3 py-1 rounded-full" data-i18n="starter_badge">سەرەتایی</span>
-            <h3 class="text-xl sm:text-2xl font-black gold-title mt-3 mb-1" data-i18n="starter_title">ئۆفەری سەرەتایی</h3>
-            <p class="text-xs mb-4" style="color: var(--text-muted);" data-i18n="starter_period">مانگانە / بۆ دەستپێکێکی دروست</p>
-            <hr class="border-amber-500/20 my-3">
-            <ul class="space-y-3 text-xs sm:text-sm font-medium mb-6" style="color: var(--text-muted);">
-              <li class="flex items-center gap-2.5"><i class="fa-solid fa-circle-play text-amber-500"></i> <span data-i18n="starter_f1">سێ ڤیدۆ تۆمارکردن</span></li>
-              <li class="flex items-center gap-2.5"><i class="fa-solid fa-scissors text-amber-500"></i> <span data-i18n="starter_f2">ئیدیتکردنی ڤیدۆکان</span></li>
-              <li class="flex items-center gap-2.5"><i class="fa-solid fa-layer-group text-amber-500"></i> <span data-i18n="starter_f3">دیزاینی چوار پۆست</span></li>
-              <li class="flex items-center gap-2.5"><i class="fa-solid fa-pen-fancy text-amber-500"></i> <span data-i18n="starter_f4">نوسینی کاپشنی پۆستەکان</span></li>
-            </ul>
-          </div>
-          <div>
-            <div class="bg-amber-500/10 border border-amber-600/30 text-amber-600 rounded-xl p-2 text-[11px] font-bold text-center mb-3 flex items-center justify-center gap-1">
-              <i class="fa-solid fa-triangle-exclamation text-amber-500"></i>
-              <span data-i18n="ads_disclaimer">ئاگاداربە: بودجەی تەرخانکراو بۆ ads جیایە لە پارەی مانگانەی ئۆفەر</span>
-            </div>
-            <a href="https://wa.me/9647729628611?text=سڵاو،%20داواکاری%20ئۆفەری%20سەرەتاییم%20هەیە" target="_blank" class="w-full block text-center theme-card hover:border-amber-500 gold-title font-bold py-3 rounded-xl transition shadow-sm text-sm">
-              <span data-i18n="btn_order_package">داواکردنی ئەم ئۆفەرە</span>
-            </a>
-          </div>
-        </div>
-
-        <!-- 2. ئۆفەری گەشەسەندوو -->
-        <div class="featured-card rounded-2xl sm:rounded-3xl p-6 sm:p-7 flex flex-col justify-between relative">
-          <span class="absolute -top-3.5 right-6 bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 text-[11px] font-black px-3 py-1 rounded-full shadow-md" data-i18n="growing_featured_badge">
-            پێشنیارکراو ★
-          </span>
-          <div>
-            <div id="pack-growing-3d" class="canvas-3d-box h-24 rounded-xl mb-3 border border-amber-500/30" style="background: var(--card-inner-bg);"></div>
-            <span class="text-xs font-bold bg-amber-500/20 border border-amber-600/40 text-amber-600 px-3 py-1 rounded-full" data-i18n="growing_badge">گەشەسەندوو</span>
-            <h3 class="text-xl sm:text-2xl font-black gold-title mt-3 mb-1" data-i18n="growing_title">ئۆفەری گەشەسەندوو</h3>
-            <p class="text-xs mb-4" style="color: var(--text-muted);" data-i18n="growing_period">مانگانە / بۆ فراوانکردن و کارلێکی زیاتر</p>
-            <hr class="border-amber-500/20 my-3">
-            <ul class="space-y-2.5 text-xs sm:text-sm font-medium mb-6" style="color: var(--text-muted);">
-              <li class="flex items-center gap-2.5"><i class="fa-solid fa-circle-play text-amber-500"></i> <span data-i18n="growing_f1">چوار ڤیدۆ تۆمارکردن</span></li>
-              <li class="flex items-center gap-2.5"><i class="fa-solid fa-sun text-amber-500"></i> <span data-i18n="growing_f2">ڕێکخستنی ڕوناکی ڤیدۆکان</span></li>
-              <li class="flex items-center gap-2.5"><i class="fa-solid fa-scissors text-amber-500"></i> <span data-i18n="growing_f3">ئیدیتکردنی ڤیدۆکان</span></li>
-              <li class="flex items-center gap-2.5 gold-title font-bold"><i class="fa-solid fa-layer-group text-amber-500"></i> <span data-i18n="growing_f4">دیزاینی پێنج پۆست</span></li>
-              <li class="flex items-center gap-2.5 gold-title font-bold"><i class="fa-solid fa-crown text-amber-500"></i> <span data-i18n="growing_f5">براندینگ</span></li>
-              <li class="flex items-center gap-2.5"><i class="fa-solid fa-pen-fancy text-amber-500"></i> <span data-i18n="growing_f6">نوسینی کاپشنی پۆستەکان</span></li>
-              <li class="flex items-center gap-2.5"><i class="fa-solid fa-bullhorn text-amber-500"></i> <span data-i18n="growing_f7">سەرپەرشتی سپۆنسەر</span></li>
-            </ul>
-          </div>
-          <div>
-            <div class="bg-amber-500/10 border border-amber-600/30 text-amber-600 rounded-xl p-2 text-[11px] font-bold text-center mb-3 flex items-center justify-center gap-1">
-              <i class="fa-solid fa-triangle-exclamation text-amber-500"></i>
-              <span data-i18n="ads_disclaimer">ئاگاداربە: بودجەی تەرخانکراو بۆ ads جیایە لە پارەی مانگانەی ئۆفەر</span>
-            </div>
-            <a href="https://wa.me/9647729628611?text=سڵاو،%20داواکاری%20ئۆفەری%20گەشەسەندووم%20هەیە" target="_blank" class="w-full block text-center bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-black py-3 rounded-xl transition shadow-lg shadow-amber-500/25 text-sm">
-              <span data-i18n="btn_order_package">داواکردنی ئەم ئۆفەرە</span>
-            </a>
-          </div>
-        </div>
-
-        <!-- 3. ئۆفەری پێشکەوتوو -->
-        <div class="theme-card rounded-2xl sm:rounded-3xl p-6 sm:p-7 flex flex-col justify-between">
-          <div>
-            <div id="pack-adv-3d" class="canvas-3d-box h-24 rounded-xl mb-3 border border-amber-600/20" style="background: var(--card-inner-bg);"></div>
-            <span class="text-xs font-bold bg-amber-500/15 border border-amber-600/30 text-amber-600 px-3 py-1 rounded-full" data-i18n="adv_badge">VIP / پێشکەوتوو</span>
-            <h3 class="text-xl sm:text-2xl font-black gold-title mt-3 mb-1" data-i18n="adv_title">ئۆفەری پێشکەوتوو</h3>
-            <p class="text-xs mb-4" style="color: var(--text-muted);" data-i18n="adv_period">مانگانە / تەواوترین خزمەتگوزاری نەشتەرگەری</p>
-            <hr class="border-amber-500/20 my-3">
-            <ul class="space-y-2 text-[11px] sm:text-xs font-medium mb-6" style="color: var(--text-muted);">
-              <li class="flex items-center gap-2 font-bold gold-title"><i class="fa-solid fa-circle-play text-amber-500"></i> <span data-i18n="adv_f1">پێنج ڤیدۆ تۆمارکردن</span></li>
-              <li class="flex items-center gap-2"><i class="fa-solid fa-sun text-amber-500"></i> <span data-i18n="adv_f2">ڕێکخستنی ڕوناکی ڤیدۆکان</span></li>
-              <li class="flex items-center gap-2"><i class="fa-solid fa-wand-magic-sparkles text-amber-500"></i> <span data-i18n="adv_f3">ئیدیتکردن + مۆشن گرافیک</span></li>
-              <li class="flex items-center gap-2 gold-title font-bold"><i class="fa-solid fa-layer-group text-amber-500"></i> <span data-i18n="adv_f4">دیزاینی شەش پۆست + براندینگی تایبەت</span></li>
-              <li class="flex items-center gap-2"><i class="fa-solid fa-pen-fancy text-amber-500"></i> <span data-i18n="adv_f5">نوسینی کاپشن و هەڵبژاردنی ناوەڕۆک</span></li>
-              <li class="flex items-center gap-2 gold-title font-bold"><i class="fa-solid fa-hospital-user text-amber-500"></i> <span data-i18n="adv_f6">ڤیدۆ لە ژووری نەشتەرگەری و کەیسی دەگمەن</span></li>
-              <li class="flex items-center gap-2 gold-title font-bold"><i class="fa-solid fa-share-nodes text-amber-500"></i> <span data-i18n="adv_f7">هاوبەشی کردنی پۆست لەگەڵ پەیجی mr nurse</span></li>
-              <li class="flex items-center gap-2"><i class="fa-solid fa-chart-pie text-amber-500"></i> <span data-i18n="adv_f8">سەرپەرشتی سپۆنسەر و ڕاپۆرتی مانگانە</span></li>
-            </ul>
-          </div>
-          <div>
-            <div class="bg-amber-500/10 border border-amber-600/30 text-amber-600 rounded-xl p-2 text-[11px] font-bold text-center mb-3 flex items-center justify-center gap-1">
-              <i class="fa-solid fa-triangle-exclamation text-amber-500"></i>
-              <span data-i18n="ads_disclaimer">ئاگاداربە: بودجەی تەرخانکراو بۆ ads جیایە لە پارەی مانگانەی ئۆفەر</span>
-            </div>
-            <a href="https://wa.me/9647729628611?text=سڵاو،%20داواکاری%20ئۆفەری%20پێشکەوتووم%20هەیە" target="_blank" class="w-full block text-center theme-card hover:border-amber-500 gold-title font-bold py-3 rounded-xl transition shadow-sm text-sm">
-              <span data-i18n="btn_order_package">داواکردنی ئەم ئۆفەرە</span>
-            </a>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- بەشی نمونەی کارەکان -->
-  <section id="portfolio" class="py-16 sm:py-20 border-t border-amber-600/15" style="background-color: var(--bg-alt);">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6">
-      <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
-        <span class="text-xs font-bold bg-amber-500/15 border border-amber-600/30 text-amber-600 px-3 py-1 rounded-full" data-i18n="port_eyebrow">نمونەی کارەکان</span>
-        <h2 class="text-2xl sm:text-4xl font-black mt-3 mb-2" data-i18n="port_h2">بەشی نمونەی کارەکانمان</h2>
-        <p class="text-xs sm:text-sm" style="color: var(--text-muted);" data-i18n="port_sub">بەشێک لە بەرهەمهێنانە ڤیدیۆیی و دیزاینە تایبەتەکانمان</p>
-      </div>
-
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-md sm:max-w-none mx-auto">
-        
-        <div class="theme-card rounded-2xl sm:rounded-3xl p-5 sm:p-6 flex flex-col items-center text-center">
-          <div id="port-cam-3d" class="canvas-3d-box h-36 rounded-xl mb-4 border border-amber-600/20" style="background: var(--card-inner-bg);"></div>
-          <h3 class="text-base sm:text-lg font-bold gold-title mb-1" data-i18n="port_card1_title">ڤیدیۆی هۆشیاری پزیشکی</h3>
-          <p class="text-xs" style="color: var(--text-muted);" data-i18n="port_card1_desc">تۆمارکردن، ڕووناکی پرۆفێشناڵ و مۆشن گرافیک</p>
-        </div>
-
-        <div class="theme-card rounded-2xl sm:rounded-3xl p-5 sm:p-6 flex flex-col items-center text-center">
-          <div id="port-surg-3d" class="canvas-3d-box h-36 rounded-xl mb-4 border border-amber-600/20" style="background: var(--card-inner-bg);"></div>
-          <h3 class="text-base sm:text-lg font-bold gold-title mb-1" data-i18n="port_card2_title">تۆماری ژووری نەشتەرگەری</h3>
-          <p class="text-xs" style="color: var(--text-muted);" data-i18n="port_card2_desc">تایبەت بە کەیسە دەگمەن و گرنگەکان</p>
-        </div>
-
-        <div class="theme-card rounded-2xl sm:rounded-3xl p-5 sm:p-6 flex flex-col items-center text-center sm:col-span-2 lg:col-span-1 max-w-md sm:max-w-none mx-auto w-full">
-          <div id="port-design-3d" class="canvas-3d-box h-36 rounded-xl mb-4 border border-amber-600/20" style="background: var(--card-inner-bg);"></div>
-          <h3 class="text-base sm:text-lg font-bold gold-title mb-1" data-i18n="port_card3_title">دیزاین و براندینگی پزیشکی</h3>
-          <p class="text-xs" style="color: var(--text-muted);" data-i18n="port_card3_desc">شێواز و ناسنامەی تایبەت بە پەیج و لۆگۆ</p>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- بەشی داواکاری ئۆفەر و پەیوەندی کردن -->
-  <section id="contact" class="py-16 sm:py-20 lg:py-24">
-    <div class="max-w-3xl mx-auto px-4 sm:px-6">
-      <div class="text-center mb-10 sm:mb-14">
-        <span class="text-xs font-bold bg-amber-500/15 border border-amber-600/30 text-amber-600 px-3 py-1 rounded-full" data-i18n="contact_eyebrow">داواکاری</span>
-        <h2 class="text-2xl sm:text-4xl lg:text-5xl font-black mt-3 mb-2" data-i18n="contact_h2">بەشی داواکاری ئۆفەر بە ئەکاونت</h2>
-        <p class="text-xs sm:text-sm" style="color: var(--text-muted);" data-i18n="contact_sub">زانیارییەکان بنووسە بۆ پەیوەندیکردن بە ستافەکەمانەوە</p>
-      </div>
-
-      <div class="theme-card rounded-2xl sm:rounded-3xl p-6 sm:p-10 shadow-xl">
-        <form id="offer-form" class="space-y-5 sm:space-y-6">
-          <div class="grid sm:grid-cols-2 gap-5 sm:gap-6">
-            <div>
-              <label class="block text-xs sm:text-sm font-bold mb-2 flex items-center gap-2 gold-title">
-                <i class="fa-solid fa-user-doctor text-amber-500"></i>
-                <span data-i18n="form_label_name">ناوی پزیشک / سەنتەر</span>
-              </label>
-              <input id="name" type="text" required placeholder="د. ناوی سیانی" class="w-full rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-amber-500 transition" style="background: var(--input-bg); border: 1px solid var(--input-border); color: var(--text-main);">
-            </div>
-            <div>
-              <label class="block text-xs sm:text-sm font-bold mb-2 flex items-center gap-2 gold-title">
-                <i class="fa-solid fa-at text-amber-500"></i>
-                <span data-i18n="form_label_account">ئەکاونتی سۆشیال میدیا یان لینک</span>
-              </label>
-              <input id="account" type="text" required placeholder="@username" class="w-full rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-amber-500 transition" style="background: var(--input-bg); border: 1px solid var(--input-border); color: var(--text-main);">
-            </div>
-          </div>
-
-          <div>
-            <label class="block text-xs sm:text-sm font-bold mb-2 flex items-center gap-2 gold-title">
-              <i class="fa-solid fa-box-open text-amber-500"></i>
-              <span data-i18n="form_label_package">هەڵبژاردنی ئۆفەر</span>
-            </label>
-            <select id="package" class="w-full rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-amber-500 transition" style="background: var(--input-bg); border: 1px solid var(--input-border); color: var(--text-main);">
-              <option value="ئۆفەری سەرەتایی" data-i18n="opt_starter">ئۆفەری سەرەتایی</option>
-              <option value="ئۆفەری گەشەسەندوو" selected data-i18n="opt_growing">ئۆفەری گەشەسەندوو</option>
-              <option value="ئۆفەری پێشکەوتوو" data-i18n="opt_adv">ئۆفەری پێشکەوتوو</option>
-            </select>
-          </div>
-
-          <button type="submit" class="w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-black py-3.5 rounded-xl transition text-sm sm:text-base shadow-lg shadow-amber-500/25 flex items-center justify-center gap-2.5">
-            <i class="fa-brands fa-whatsapp text-xl"></i>
-            <span data-i18n="btn_send_whatsapp">ناردنی داواکاری لە ڕێگەی واتسئاپەوە</span>
-          </button>
-        </form>
-      </div>
-
-      <div class="flex flex-wrap justify-center gap-4 sm:gap-6 mt-8 sm:mt-10">
-        <a href="https://instagram.com/prd.cc" target="_blank" class="flex items-center gap-2.5 theme-card hover:border-amber-500 px-5 py-3 rounded-2xl transition gold-title font-bold shadow-sm text-xs sm:text-sm">
-          <i class="fa-brands fa-instagram text-xl text-pink-500"></i>
-          <span><span data-i18n="contact_ig">ئینیستاگرام:</span> prd.cc</span>
-        </a>
-        <a href="https://wa.me/9647729628611" target="_blank" class="flex items-center gap-2.5 theme-card hover:border-amber-500 px-5 py-3 rounded-2xl transition gold-title font-bold shadow-sm text-xs sm:text-sm">
-          <i class="fa-brands fa-whatsapp text-xl text-emerald-500"></i>
-          <span class="flex items-center gap-1.5">
-            <span data-i18n="contact_wa">واتسئاپ:</span>
-            <bdi dir="ltr" class="font-mono tracking-wider">0772 962 8611</bdi>
-          </span>
-        </a>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- پەراوێز (Footer) -->
-  <footer class="py-6 sm:py-8 border-t border-amber-600/15 text-center text-xs sm:text-sm transition-colors duration-300" style="background: var(--footer-bg); color: var(--text-muted);">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row justify-between items-center gap-3">
-      <div class="flex items-center gap-2 gold-title font-black">
-        <i class="fa-solid fa-staff-snake"></i>
-        <span><span data-i18n="footer_brand">ستافی پرد</span> (prd.cc)</span>
-      </div>
-      <p data-i18n="footer_rights">© 2026 هەموو مافەکان پارێزراون بۆ دروستکردنی ناوەڕۆکی پزیشکی</p>
-    </div>
-  </footer>
-
-  <!-- فەرهەنگی وەرگێڕان -->
-  <script>
-    const translations = {
-      ku: {
-        doc_title: "ستافی پرد | دروستکردنی ناوەڕۆکی پزیشکی",
-        logo_title: "ستافی پرد",
-        nav_about: "دەربارە",
-        nav_packages: "ئۆفەرەکان",
-        nav_portfolio: "نمونەی کارەکان",
-        nav_contact: "داواکاری",
-        nav_cta: "پەیوەندی",
-        hero_eyebrow: "ستافی پرد بۆ دروستکردنی ناوەڕۆکی پزیشکی",
-        hero_h1_part1: "ئێمە دەبینە",
-        hero_h1_highlight: "پردی پەیوەندی",
-        hero_h1_part2: "نێوان نەخۆش و پزیشکەکان",
-        hero_description: "ئێمە لە prd.cc بەرهەمهێنان و بەڕێوەبردنی سۆشیال میدیای ناوەندە پزیشکییەکان لە ئەستۆ دەگرین بە کوالێتی بەرز و ڕێگەی زانستی کە متمانەی نەخۆشەکانت زیاد دەکات.",
-        hero_staff_badge: "هەموو کارەکانمان لەلایەن ستافێکی شارەزای پزیشکان و پەرستارانەوە ئەکرێت",
-        btn_view_packages: "بینینی ئۆفەرەکان",
-        btn_request_offer: "داواکاری ئۆفەر",
-        stat_1_num: "٣ ئاست",
-        stat_1_sub: "ئۆفەری مانگانە",
-        stat_2_num: "تەواوکار",
-        stat_2_sub: "تۆمار، ئیدیت و مۆشن",
-        stat_3_num: "زانستی",
-        stat_3_sub: "بۆ دروستکردنی متمانە",
-        bridge_patient: "نەخۆش",
-        bridge_doctors: "پزیشک • دەرمانخانە",
-        bridge_flow_note: "گواستنەوەی بەردەوامی زانیارییەکان لە ڕێگەی پردی متمانەوە",
-        about_eyebrow: "تایبەتمەندییەکان",
-        about_h2: "بۆچی ستافی پرد هەڵدەبژێریت؟",
-        about_sub: "بە دەست لێدان کارلێک لەگەڵ مۆدێلە 3Dیە ئاڵتونییەکان بکە",
-        feat_1_title: "کوالێتی زانستی بەرز",
-        feat_1_desc: "بەرهەمهێنانی ناوەڕۆک بەپێی نوێترین ستانداردە پزیشکی و زانستییەکان بەبێ زیادەڕۆیی.",
-        feat_2_title: "پردی متمانەی نەخۆش",
-        feat_2_desc: "دروستکردنی پەیوەندییەکی ڕاستەقینە لە نێوان نەخۆش و پزیشک، کلینیک و دەرمانخانەکان.",
-        feat_3_title: "گەشە و سپۆنسەرینگ",
-        feat_3_desc: "سەرپەرشتی سپۆنسەر و ڕاپۆرتی ئاماری مانگانە بۆ پەیج.",
-        packages_eyebrow: "ئۆفەرەکان",
-        packages_h2: "ئۆفەرە مانگانەکانمان",
-        packages_sub: "پاکێجی گونجاو بۆ ناوەندە پزیشکییەکەت دیاری بکە",
-        starter_badge: "سەرەتایی",
-        starter_title: "ئۆفەری سەرەتایی",
-        starter_period: "مانگانە / بۆ دەستپێکێکی دروست",
-        starter_f1: "سێ ڤیدۆ تۆمارکردن",
-        starter_f2: "ئیدیتکردنی ڤیدۆکان",
-        starter_f3: "دیزاینی چوار پۆست",
-        starter_f4: "نوسینی کاپشنی پۆستەکان",
-        ads_disclaimer: "ئاگاداربە: بودجەی تەرخانکراو بۆ ads جیایە لە پارەی مانگانەی ئۆفەر",
-        btn_order_package: "داواکردنی ئەم ئۆفەرە",
-        growing_featured_badge: "پێشنیارکراو ★",
-        growing_badge: "گەشەسەندوو",
-        growing_title: "ئۆفەری گەشەسەندوو",
-        growing_period: "مانگانە / بۆ فراوانکردن و کارلێکی زیاتر",
-        growing_f1: "چوار ڤیدۆ تۆمارکردن",
-        growing_f2: "ڕێکخستنی ڕوناکی ڤیدۆکان",
-        growing_f3: "ئیدیتکردنی ڤیدۆکان",
-        growing_f4: "دیزاینی پێنج پۆست",
-        growing_f5: "براندینگ",
-        growing_f6: "نوسینی کاپشنی پۆستەکان",
-        growing_f7: "سەرپەرشتی سپۆنسەر",
-        adv_badge: "VIP / پێشکەوتوو",
-        adv_title: "ئۆفەری پێشکەوتوو",
-        adv_period: "مانگانە / تەواوترین خزمەتگوزاری نەشتەرگەری",
-        adv_f1: "پێنج ڤیدۆ تۆمارکردن",
-        adv_f2: "ڕێکخستنی ڕوناکی ڤیدۆکان",
-        adv_f3: "ئیدیتکردن + مۆشن گرافیک",
-        adv_f4: "دیزاینی شەش پۆست + براندینگی تایبەت",
-        adv_f5: "نوسینی کاپشن و هەڵبژاردنی ناوەڕۆک",
-        adv_f6: "ڤیدۆ لە ژووری نەشتەرگەری و کەیسی دەگمەن",
-        adv_f7: "هاوبەشی کردنی پۆست لەگەڵ پەیجی mr nurse",
-        adv_f8: "سەرپەرشتی سپۆنسەر و ڕاپۆرتی مانگانە",
-        port_eyebrow: "نمونەی کارەکان",
-        port_h2: "بەشی نمونەی کارەکانمان",
-        port_sub: "بەشێک لە بەرهەمهێنانە ڤیدیۆیی و دیزاینە تایبەتەکانمان",
-        port_card1_title: "ڤیدیۆی هۆشیاری پزیشکی",
-        port_card1_desc: "تۆمارکردن، ڕووناکی پرۆفێشناڵ و مۆشن گرافیک",
-        port_card2_title: "تۆماری ژووری نەشتەرگەری",
-        port_card2_desc: "تایبەت بە کەیسە دەگمەن و گرنگەکان",
-        port_card3_title: "دیزاین و براندینگی پزیشکی",
-        port_card3_desc: "شێواز و ناسنامەی تایبەت بە پەیج و لۆگۆ",
-        contact_eyebrow: "داواکاری",
-        contact_h2: "بەشی داواکاری ئۆفەر بە ئەکاونت",
-        contact_sub: "زانیارییەکان بنووسە بۆ پەیوەندیکردن بە ستافەکەمانەوە",
-        form_label_name: "ناوی پزیشک / سەنتەر",
-        form_label_account: "ئەکاونتی سۆشیال میدیا یان لینک",
-        form_label_package: "هەڵبژاردنی ئۆفەر",
-        opt_starter: "ئۆفەری سەرەتایی",
-        opt_growing: "ئۆفەری گەشەسەندوو",
-        opt_adv: "ئۆفەری پێشکەوتوو",
-        btn_send_whatsapp: "ناردنی داواکاری لە ڕێگەی واتسئاپەوە",
-        contact_ig: "ئینیستاگرام:",
-        contact_wa: "واتسئاپ:",
-        footer_brand: "ستافی پرد",
-        footer_rights: "© 2026 هەموو مافەکان پارێزراون بۆ دروستکردنی ناوەڕۆکی پزیشکی",
-        name_placeholder: "د. ناوی سیانی",
-        account_placeholder: "@username"
-      },
-      en: {
-        doc_title: "prd Staff | Medical Content Creation",
-        logo_title: "prd Staff",
-        nav_about: "About",
-        nav_packages: "Packages",
-        nav_portfolio: "Portfolio",
-        nav_contact: "Contact",
-        nav_cta: "Contact",
-        hero_eyebrow: "prd Staff for Medical Content Creation",
-        hero_h1_part1: "We are the",
-        hero_h1_highlight: "Bridge of Trust",
-        hero_h1_part2: "Between Patients & Doctors",
-        hero_description: "At prd.cc, we manage and produce high-quality, scientifically sound social media content for healthcare centers that enhances patient confidence.",
-        hero_staff_badge: "All our work is crafted by an expert team of doctors and nurses",
-        btn_view_packages: "View Packages",
-        btn_request_offer: "Request an Offer",
-        stat_1_num: "3 Tiers",
-        stat_1_sub: "Monthly Packages",
-        stat_2_num: "Full Suite",
-        stat_2_sub: "Filming, Edit & Motion",
-        stat_3_num: "Scientific",
-        stat_3_sub: "To Build Patient Trust",
-        bridge_patient: "Patients",
-        bridge_doctors: "Doctors • Pharmacies",
-        bridge_flow_note: "Continuous stream of scientific insights across the bridge of trust",
-        about_eyebrow: "Why Choose Us",
-        about_h2: "Why Partner with prd Staff?",
-        about_sub: "Interact with our 3D golden medical models via touch or mouse",
-        feat_1_title: "High Scientific Quality",
-        feat_1_desc: "Producing content strictly according to modern medical guidelines without inaccuracies.",
-        feat_2_title: "Patient Trust Bridge",
-        feat_2_desc: "Building a genuine connection between patients, doctors, clinics, and pharmacies.",
-        feat_3_title: "Growth & Sponsorship",
-        feat_3_desc: "Comprehensive ad sponsorship supervision and detailed monthly page performance reports.",
-        packages_eyebrow: "Pricing",
-        packages_h2: "Our Monthly Packages",
-        packages_sub: "Select the most suitable plan to elevate your medical practice",
-        starter_badge: "Starter",
-        starter_title: "Starter Package",
-        starter_period: "Monthly / For a solid foundation",
-        starter_f1: "3 Video Recordings",
-        starter_f2: "Professional Video Editing",
-        starter_f3: "4 Social Post Designs",
-        starter_f4: "Post Caption Copywriting",
-        ads_disclaimer: "Note: Dedicated ad budget is separate from the monthly package fee",
-        btn_order_package: "Order This Package",
-        growing_featured_badge: "Recommended ★",
-        growing_badge: "Growing",
-        growing_title: "Growing Package",
-        growing_period: "Monthly / For continuous growth and reach",
-        growing_f1: "4 Video Recordings",
-        growing_f2: "Professional Studio Lighting",
-        growing_f3: "Professional Video Editing",
-        growing_f4: "5 Social Post Designs",
-        growing_f5: "Branding",
-        growing_f6: "Post Caption Copywriting",
-        growing_f7: "Ad Sponsorship Supervision",
-        adv_badge: "VIP / Advanced",
-        adv_title: "Advanced Package",
-        adv_period: "Monthly / Full surgical & clinic coverage",
-        adv_f1: "5 Video Recordings",
-        adv_f2: "Professional Studio Lighting",
-        adv_f3: "Video Editing + Motion Graphics",
-        adv_f4: "6 Post Designs + Custom Branding",
-        adv_f5: "Caption Copywriting & Topic Curation",
-        adv_f6: "Filming in Operating Room & Rare Cases",
-        adv_f7: "Post Cross-Promotion with 'Mr Nurse' page",
-        adv_f8: "Ad Sponsorship Supervision & Monthly Report",
-        port_eyebrow: "Portfolio",
-        port_h2: "Our Portfolio & Samples",
-        port_sub: "A look into our medical video productions and bespoke designs",
-        port_card1_title: "Medical Awareness Videos",
-        port_card1_desc: "Cinematic filming, studio lighting and motion graphics",
-        port_card2_title: "Operating Room Coverage",
-        port_card2_desc: "Filming rare surgical procedures with full medical safety",
-        port_card3_title: "Medical Branding & Design",
-        port_card3_desc: "Custom visual identity, logo, and social media aesthetic",
-        contact_eyebrow: "Order Now",
-        contact_h2: "Request a Package with Your Account",
-        contact_sub: "Submit your details and our team will get in touch immediately",
-        form_label_name: "Doctor / Medical Center Name",
-        form_label_account: "Social Media Handle or Link",
-        form_label_package: "Choose Package",
-        opt_starter: "Starter Package",
-        opt_growing: "Growing Package",
-        opt_adv: "Advanced Package",
-        btn_send_whatsapp: "Submit Request via WhatsApp",
-        contact_ig: "Instagram:",
-        contact_wa: "WhatsApp:",
-        footer_brand: "prd Staff",
-        footer_rights: "© 2026 All rights reserved for prd Medical Content Creation",
-        name_placeholder: "Dr. Full Name",
-        account_placeholder: "@username or URL"
-      }
-    };
-
-    let currentLang = localStorage.getItem('lang') || 'ku';
-
-    function applyLanguage(lang) {
-      currentLang = lang;
-      localStorage.setItem('lang', lang);
-
-      const html = document.documentElement;
-      const langLabel = document.getElementById('lang-label');
-      const nameInput = document.getElementById('name');
-      const accountInput = document.getElementById('account');
-      const heroTextContainer = document.getElementById('hero-text-container');
-      const heroStats = document.getElementById('hero-stats');
-      const heroActions = document.getElementById('hero-actions');
-
-      if (lang === 'en') {
-        html.setAttribute('dir', 'ltr');
-        html.setAttribute('lang', 'en');
-        langLabel.textContent = 'کوردی';
-        nameInput.placeholder = translations.en.name_placeholder;
-        accountInput.placeholder = translations.en.account_placeholder;
-        
-        if (heroTextContainer) {
-          heroTextContainer.classList.remove('lg:text-right', 'lg:items-start');
-          heroTextContainer.classList.add('lg:text-left', 'lg:items-start');
-        }
-        if (heroStats) {
-          heroStats.classList.remove('lg:text-right');
-          heroStats.classList.add('lg:text-left');
-        }
-        if (heroActions) {
-          heroActions.classList.remove('lg:justify-start');
-          heroActions.classList.add('lg:justify-start');
-        }
-      } else {
-        html.setAttribute('dir', 'rtl');
-        html.setAttribute('lang', 'ckb');
-        langLabel.textContent = 'English';
-        nameInput.placeholder = translations.ku.name_placeholder;
-        accountInput.placeholder = translations.ku.account_placeholder;
-
-        if (heroTextContainer) {
-          heroTextContainer.classList.remove('lg:text-left', 'lg:items-start');
-          heroTextContainer.classList.add('lg:text-right', 'lg:items-start');
-        }
-        if (heroStats) {
-          heroStats.classList.remove('lg:text-left');
-          heroStats.classList.add('lg:text-right');
-        }
-        if (heroActions) {
-          heroActions.classList.remove('lg:justify-start');
-          heroActions.classList.add('lg:justify-start');
-        }
-      }
-
-      document.title = translations[lang].doc_title;
-
-      document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if (translations[lang][key]) {
-          el.textContent = translations[lang][key];
-        }
-      });
-    }
-
-    document.getElementById('lang-toggle').addEventListener('click', () => {
-      applyLanguage(currentLang === 'ku' ? 'en' : 'ku');
-    });
-
-    applyLanguage(currentLang);
-
-    document.getElementById('offer-form').addEventListener('submit', (e) => {
-      e.preventDefault();
-      const name = document.getElementById('name').value;
-      const account = document.getElementById('account').value;
-      const pkgSelect = document.getElementById('package');
-      const selectedPkg = pkgSelect.options[pkgSelect.selectedIndex].text;
-
-      let msg = '';
-      if (currentLang === 'en') {
-        msg = `New Request for prd Staff:\nName: ${name}\nAccount: ${account}\nPackage: ${selectedPkg}`;
-      } else {
-        msg = `داواکاری نوێ بۆ ستافی پرد:\nناو: ${name}\nئەکاونت: ${account}\nئۆفەر: ${selectedPkg}`;
-      }
-
-      window.open(`https://wa.me/9647729628611?text=${encodeURIComponent(msg)}`, '_blank');
-    });
-  </script>
-
-  <!-- سکریپتی دارک مۆد -->
-  <script>
-    const themeToggleBtn = document.getElementById('theme-toggle');
-    const themeIcon = document.getElementById('theme-icon');
-
-    const currentTheme = localStorage.getItem('theme');
-    if (currentTheme === 'dark') {
-      document.body.classList.add('dark-mode');
-      themeIcon.classList.replace('fa-moon', 'fa-sun');
-    }
-
-    themeToggleBtn.addEventListener('click', () => {
-      document.body.classList.toggle('dark-mode');
-      const isDark = document.body.classList.contains('dark-mode');
-      
-      if (isDark) {
-        themeIcon.classList.replace('fa-moon', 'fa-sun');
-        localStorage.setItem('theme', 'dark');
-      } else {
-        themeIcon.classList.replace('fa-sun', 'fa-moon');
-        localStorage.setItem('theme', 'light');
-      }
-    });
-  </script>
-
-  <!-- سکریپتی 3D زۆر خێرا کراو (High Performance & Zero Lag Engine) -->
-  <script>
-    function setupCard3D(elementId, buildObjectCallback, customCamZ = 5) {
-      const container = document.getElementById(elementId);
-      if (!container) return;
-
-      const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 50);
-      camera.position.z = customCamZ;
-
-      // بەکارهێنانی پیکسڵ ڕەشیۆی ١.٢ بۆ ڕێگریکردن لە هیلاکبوونی GPU لەسەر شاشەی Retina
-      const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: "low-power" });
-      renderer.setSize(container.clientWidth, container.clientHeight);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.2));
-      container.appendChild(renderer.domElement);
-
-      const ambientLight = new THREE.AmbientLight(0xffffff, 1.3);
-      scene.add(ambientLight);
-
-      const pointLight = new THREE.PointLight(0xd97706, 2.2, 25);
-      pointLight.position.set(4, 4, 4);
-      scene.add(pointLight);
-
-      const group = new THREE.Group();
-      scene.add(group);
-
-      const goldMat = new THREE.MeshStandardMaterial({ color: 0xd97706, metalness: 0.8, roughness: 0.25 });
-      const goldWire = new THREE.MeshBasicMaterial({ color: 0xb45309, wireframe: true, transparent: true, opacity: 0.35 });
-
-      buildObjectCallback(group, { goldMat, goldWire });
-
-      let isDragging = false;
-      let prevPos = { x: 0, y: 0 };
-      let rotX = 0, rotY = 0;
-      let isVisible = false; // تەنها کاتێک کاردەکات کە لەسەر شاشە دیارە
-
-      // پشکنەری چوونە پێش چاو (Intersection Observer)
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          isVisible = entry.isIntersecting;
-          if (isVisible) requestAnimationFrame(render);
-        });
-      }, { threshold: 0.05 });
-      observer.observe(container);
-
-      const onStart = (x, y) => { isDragging = true; prevPos = { x, y }; };
-      const onMove = (x, y) => {
-        if (!isDragging) return;
-        rotY += (x - prevPos.x) * 0.01;
-        rotX += (y - prevPos.y) * 0.01;
-        prevPos = { x, y };
-      };
-      const onEnd = () => { isDragging = false; };
-
-      container.addEventListener('mousedown', (e) => onStart(e.clientX, e.clientY));
-      window.addEventListener('mousemove', (e) => onMove(e.clientX, e.clientY));
-      window.addEventListener('mouseup', onEnd);
-
-      container.addEventListener('touchstart', (e) => { 
-        if(e.touches.length) onStart(e.touches[0].clientX, e.touches[0].clientY); 
-      }, { passive: true });
-      window.addEventListener('touchmove', (e) => { 
-        if(e.touches.length) onMove(e.touches[0].clientX, e.touches[0].clientY); 
-      }, { passive: true });
-      window.addEventListener('touchend', onEnd);
-
-      window.addEventListener('resize', () => {
-        if (!container.clientWidth || !container.clientHeight) return;
-        camera.aspect = container.clientWidth / container.clientHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(container.clientWidth, container.clientHeight);
-      });
-
-      function render() {
-        if (!isVisible) return; // وەستاندنی ڕەندەر لە کاتی دیارنەبووندا
-        group.rotation.y += (rotY - group.rotation.y) * 0.08;
-        group.rotation.x += (rotX - group.rotation.x) * 0.08;
-        if (!isDragging) rotY += 0.005;
-        renderer.render(scene, camera);
-        requestAnimationFrame(render);
-      }
-    }
-
-    // 1. About: DNA Helix 3D
-    setupCard3D('dna-3d', (grp, { goldMat }) => {
-      for (let i = -6; i <= 6; i++) {
-        const angle = i * 0.45;
-        const y = i * 0.22;
-        const x = Math.cos(angle) * 1.0;
-        const z = Math.sin(angle) * 1.0;
-
-        const s1 = new THREE.Mesh(new THREE.SphereGeometry(0.1, 12, 12), goldMat);
-        s1.position.set(x, y, z);
-        grp.add(s1);
-
-        const s2 = new THREE.Mesh(new THREE.SphereGeometry(0.1, 12, 12), goldMat);
-        s2.position.set(-x, y, -z);
-        grp.add(s2);
-
-        if (i % 2 === 0) {
-          const rung = new THREE.Mesh(new THREE.CylinderGeometry(0.02, 0.02, 2.0, 6), goldMat);
-          rung.position.set(0, y, 0);
-          rung.rotation.z = Math.PI / 2;
-          rung.rotation.y = -angle;
-          grp.add(rung);
-        }
-      }
-    }, 4.8);
-
-    // 2. About: Medical Cross 3D
-    setupCard3D('cross-3d', (grp, { goldMat }) => {
-      const v = new THREE.Mesh(new THREE.BoxGeometry(0.4, 1.5, 0.3), goldMat);
-      const h = new THREE.Mesh(new THREE.BoxGeometry(1.5, 0.4, 0.3), goldMat);
-      grp.add(v); grp.add(h);
-      const ring = new THREE.Mesh(new THREE.TorusGeometry(1.3, 0.05, 12, 30), goldMat);
-      grp.add(ring);
-    }, 4.2);
-
-    // 3. About: Growth Diamond 3D
-    setupCard3D('growth-3d', (grp, { goldMat, goldWire }) => {
-      grp.add(new THREE.Mesh(new THREE.OctahedronGeometry(1.1), goldMat));
-      grp.add(new THREE.Mesh(new THREE.OctahedronGeometry(1.4), goldWire));
-    }, 4.2);
-
-    // 4. Starter Package Gem 3D
-    setupCard3D('pack-starter-3d', (grp, { goldMat, goldWire }) => {
-      grp.add(new THREE.Mesh(new THREE.TetrahedronGeometry(1.0), goldMat));
-      grp.add(new THREE.Mesh(new THREE.TetrahedronGeometry(1.3), goldWire));
-    }, 3.8);
-
-    // 5. Growing Package Star 3D
-    setupCard3D('pack-growing-3d', (grp, { goldMat, goldWire }) => {
-      grp.add(new THREE.Mesh(new THREE.IcosahedronGeometry(0.95), goldMat));
-      const r = new THREE.Mesh(new THREE.TorusGeometry(1.3, 0.05, 12, 25), goldWire);
-      r.rotation.x = Math.PI / 3;
-      grp.add(r);
-    }, 3.8);
-
-    // 6. Advanced Package Crown 3D
-    setupCard3D('pack-adv-3d', (grp, { goldMat, goldWire }) => {
-      grp.add(new THREE.Mesh(new THREE.DodecahedronGeometry(0.9), goldMat));
-      const r = new THREE.Mesh(new THREE.TorusGeometry(1.3, 0.04, 12, 25), goldWire);
-      grp.add(r);
-    }, 3.8);
-
-    // 7. Portfolio: Camera 3D
-    setupCard3D('port-cam-3d', (grp, { goldMat }) => {
-      const b = new THREE.Mesh(new THREE.BoxGeometry(1.1, 0.8, 0.6), goldMat);
-      const l = new THREE.Mesh(new THREE.CylinderGeometry(0.35, 0.45, 0.6, 16), goldMat);
-      l.rotation.z = Math.PI / 2;
-      l.position.x = 0.7;
-      grp.add(b); grp.add(l);
-    }, 4.2);
-
-    // 8. Portfolio: Surgery Pulse 3D
-    setupCard3D('port-surg-3d', (grp, { goldMat }) => {
-      const orb = new THREE.Mesh(new THREE.SphereGeometry(0.65, 20, 20), goldMat);
-      const t = new THREE.Mesh(new THREE.TorusGeometry(1.2, 0.07, 12, 30), goldMat);
-      t.rotation.x = Math.PI / 3;
-      grp.add(orb); grp.add(t);
-    }, 4.2);
-
-    // 9. Portfolio: Branding Prism 3D
-    setupCard3D('port-design-3d', (grp, { goldMat, goldWire }) => {
-      grp.add(new THREE.Mesh(new THREE.CylinderGeometry(0.8, 0.8, 1.2, 6), goldMat));
-      grp.add(new THREE.Mesh(new THREE.CylinderGeometry(1.1, 1.1, 1.4, 6), goldWire));
-    }, 4.2);
-  </script>
+
+<body>
+
+<!-- ================= NAV ================= -->
+
+<header>
+
+<nav class="nav glass">
+
+<a href="#home" class="logo">
+
+<span class="logoMark"><img src="data:image/png;base64,/9j/4QEIRXhpZgAATU0AKgAAAAgABgESAAMAAAABAAEAAAEaAAUAAAABAAAAVgEbAAUAAAABAAAAXgEoAAMAAAABAAIAAAITAAMAAAABAAEAAIdpAAQAAAABAAAAZgAAAAAAAABIAAAAAQAAAEgAAAABAAmQAAAHAAAABDAyMjGQAwACAAAAFAAAANiRAQAHAAAABAECAwCShgAHAAAAEgAAAOygAAAHAAAABDAxMDCgAQADAAAAAQABAACgAgAEAAAAAQAACTigAwAEAAAAAQAABmikBgADAAAAAQAAAAAAAAAAMjAyNjowODoyOCAxNjo0ODowNwBBU0NJSQAAAFNjcmVlbnNob3QAAP/hCYJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IlhNUCBDb3JlIDYuMC4wIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6cGhvdG9zaG9wPSJodHRwOi8vbnMuYWRvYmUuY29tL3Bob3Rvc2hvcC8xLjAvIiBwaG90b3Nob3A6RGF0ZUNyZWF0ZWQ9IjIwMjYtMDgtMjhUMTY6NDg6MDciLz4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8P3hwYWNrZXQgZW5kPSJ3Ij8+AP/iAihJQ0NfUFJPRklMRQABAQAAAhhhcHBsBAAAAG1udHJSR0IgWFlaIAfmAAEAAQAAAAAAAGFjc3BBUFBMAAAAAEFQUEwAAAAAAAAAAAAAAAAAAAAAAAD21gABAAAAANMtYXBwbAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACmRlc2MAAAD8AAAAMGNwcnQAAAEsAAAAUHd0cHQAAAF8AAAAFHJYWVoAAAGQAAAAFGdYWVoAAAGkAAAAFGJYWVoAAAG4AAAAFHJUUkMAAAHMAAAAIGNoYWQAAAHsAAAALGJUUkMAAAHMAAAAIGdUUkMAAAHMAAAAIG1sdWMAAAAAAAAAAQAAAAxlblVTAAAAFAAAABwARABpAHMAcABsAGEAeQAgAFAAM21sdWMAAAAAAAAAAQAAAAxlblVTAAAANAAAABwAQwBvAHAAeQByAGkAZwBoAHQAIABBAHAAcABsAGUAIABJAG4AYwAuACwAIAAyADAAMgAyWFlaIAAAAAAAAPbVAAEAAAAA0yxYWVogAAAAAAAAg98AAD2/////u1hZWiAAAAAAAABKvwAAsTcAAAq5WFlaIAAAAAAAACg4AAARCwAAyLlwYXJhAAAAAAADAAAAAmZmAADypwAADVkAABPQAAAKW3NmMzIAAAAAAAEMQgAABd7///MmAAAHkwAA/ZD///ui///9owAAA9wAAMBu/9sAhAABAQEBAQECAQECAwICAgMEAwMDAwQFBAQEBAQFBgUFBQUFBQYGBgYGBgYGBwcHBwcHCAgICAgJCQkJCQkJCQkJAQEBAQICAgQCAgQJBgUGCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQn/3QAEACj/wAARCAG9AoADASIAAhEBAxEB/8QBogAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoLEAACAQMDAgQDBQUEBAAAAX0BAgMABBEFEiExQQYTUWEHInEUMoGRoQgjQrHBFVLR8CQzYnKCCQoWFxgZGiUmJygpKjQ1Njc4OTpDREVGR0hJSlNUVVZXWFlaY2RlZmdoaWpzdHV2d3h5eoOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4eLj5OXm5+jp6vHy8/T19vf4+foBAAMBAQEBAQEBAQEAAAAAAAABAgMEBQYHCAkKCxEAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD9QKKKK/wHP74CiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP/9D9QKKKK/wHP74CiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP/9H9QKKKK/wHP74CiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP/9L9QKKKK/wHP74CiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP/9P9QKKKK/wHP74CiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP/9T9QKKKK/wHP74CiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKPbp29KAEpajTAj8zselV77ULHTYhPqEyQJ/ekIQfmcCuujgqtWShSi36ImpOMFeT0LlJx0r5V8fftv/ALJXwwaWPxt8QtDtJIPvxJdJPIvbmODe49OQK+LfH3/Bbb9iPwkrR+HL/VfEcqEgx2Nk6I2OnzzmJSPp0r9i4Q+jhx3n9RU8nyivUv2pyt99krHz+O4tyzDfxq8V80fr7SDB6dq/mk+IH/BwTMFeH4XfDkA87JdTvcj2JjhRSPpuP1r4g8f/APBbH9t7xgzR+H7rTPDsR6fY7MM4H+/O0v8AIV/XvBH7J/xize0q2Cjh4/8ATyaX4K58JmnjZkeHfLCfN6I/s647UDkZHSv4EtU/bv8A2uvE3iW18W+JfiBrFzcWc8dxFGbhktw8bBh+5TCY4xjGMdsV/bF+yP8AtD+H/wBqD4C6B8X9BIVr+ALdwf8APG7j+WeP6Bxlf9kivg/pY/QD4q8JMvwuaZvVhWpVny3he0JWuk791s/I9LgXxNwme1Z0KUeWS2Ttqj6MoqZvu1DX8In6UmFFFFAwooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD/9X9QKKKK/wHP74CiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKVRyMcUlOXrQJuy0P5iv8Agsr+2P8AtNfBj9oiy+F3wm8YXvh3RbnRILySKx8uJzK80yMfNCeaBhBwGwK/Azxn8Y/i18RXZvH/AIn1bWt+Nwvb2eZT9VZsfpX6v/8ABdwD/hs3Tx2H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Y3tKF97dGn2PyfxE8IqOc1vrdGXJUt8n6n8F/gX9qj9pP4aaRHoXw/8AHet6TYxcJb215KsSj0Cbto/LjtX3N+wZ+17+0X4p/bP+HunfELxtret6bPqYgltrq8llicSxugBTODgsDj2r+kof8Et/2C/tX21vh1p/mY6Bpguf90SAfpXvnwx/ZT/Zy+Dd2t98NPBekaPcJ0nt7WMTf9/Cpb8iK/oTxv8A2k3hXxDkOMweW8NKOJrwlHncKa5XJWvdJvQ+S4Z8JM8wleFStivdi/hTdj6DwBwpyPyop2VA2qMAcCm1/ho2f0jTvb3gooopGgUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAf/9X9QKKKK/wHP74CiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP/9b9QKKKK/wHP74CiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP/9f9QKKKK/wHP74CiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP/9D9QKKKK/wHP74CiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP/9H9QKKKK/wHP74CiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP/9L9QKKKK/wHP74CiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP/9k=" alt="لۆگۆی PRD.CC"></span>
+
+پرد
+
+</a>
+
+<div class="navLinks">
+
+<a href="#services">خزمەتگوزاری</a>
+
+<a href="#portfolio">نمونەی کار</a>
+
+<a href="#packages">ئۆفەرەکان</a>
+
+<a href="#process">پرۆسەی کار</a>
+
+<a href="#contact">پەیوەندی</a>
+
+</div>
+
+<div class="navRight">
+
+<button class="theme" id="theme">
+☀
+</button>
+
+<a
+class="btn btnGold"
+href="https://wa.me/9647729628611"
+target="_blank">
+
+پەیوەندی بە پرد
+
+</a>
+
+</div>
+
+</nav>
+
+</header>
+
+
+<main id="home">
+
+<!-- ================= HERO ================= -->
+
+<section class="hero">
+
+<div class="container heroGrid">
+
+<div class="reveal">
+
+<div class="eyebrow">
+
+<span class="dot"></span>
+
+ستافی دروستکردنی ناوەڕۆکی پزیشکی
+
+</div>
+
+<h1>
+
+ناوەڕۆک دروست دەکەین
+
+<br>
+
+کە
+
+<span class="gradient">
+متەمانە
+</span>
+
+دروست دەکات.
+
+</h1>
+
+<p class="heroText">
+
+پرد هاوبەشی دیجیتاڵی دکتۆر، کلینیک و دەرمانخانەکانە.
+
+لە بیرۆکە و ستراتیژییەوە تا تۆمارکردن، مۆنتاژ،
+
+دیزاین و گەشەپێدانی ناوەڕۆک.
+
+</p>
+
+<div class="heroButtons">
+
+<a
+class="btn btnGold"
+href="https://wa.me/9647729628611?text=سڵاو%20پرد،%20دەمەوێ%20لەسەر%20خزمەتگوزارییەکانتان%20گفتوگۆ%20بکەم."
+target="_blank">
+
+💬 پەیوەندی بە واتسئاپ
+
+</a>
+
+<a
+class="btn btnSky"
+href="#portfolio">
+
+▶ بینینی نمونەی کار
+
+</a>
+
+</div>
+
+<div class="trust">
+
+<span>✦ ناوەڕۆکی پزیشکی</span>
+
+<span>✦ کوالێتی پیشەیی</span>
+
+<span>✦ ستراتیژی و گەشە</span>
+
+</div>
+
+</div>
+
+
+<!-- HERO VISUAL -->
+
+<div class="visual reveal">
+
+<div class="orbit"></div>
+
+<div class="orbit2"></div>
+
+
+<div class="floating f1 glass">
+
+✦ PRD CREATIVE
+
+</div>
+
+
+<div class="floating f2 glass">
+
+◉ 4K MEDICAL CONTENT
+
+</div>
+
+
+<div class="floating f3 glass">
+
+↗ GROW YOUR BRAND
+
+</div>
+
+
+<div class="phone">
+
+<div class="phoneScreen">
+
+<div class="profile">
+
+<span>9:41</span>
+
+<strong>prd.cc</strong>
+
+<span class="profileLogo"><img src="data:image/png;base64,/9j/4QEIRXhpZgAATU0AKgAAAAgABgESAAMAAAABAAEAAAEaAAUAAAABAAAAVgEbAAUAAAABAAAAXgEoAAMAAAABAAIAAAITAAMAAAABAAEAAIdpAAQAAAABAAAAZgAAAAAAAABIAAAAAQAAAEgAAAABAAmQAAAHAAAABDAyMjGQAwACAAAAFAAAANiRAQAHAAAABAECAwCShgAHAAAAEgAAAOygAAAHAAAABDAxMDCgAQADAAAAAQABAACgAgAEAAAAAQAACTigAwAEAAAAAQAABmikBgADAAAAAQAAAAAAAAAAMjAyNjowODoyOCAxNjo0ODowNwBBU0NJSQAAAFNjcmVlbnNob3QAAP/hCYJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IlhNUCBDb3JlIDYuMC4wIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6cGhvdG9zaG9wPSJodHRwOi8vbnMuYWRvYmUuY29tL3Bob3Rvc2hvcC8xLjAvIiBwaG90b3Nob3A6RGF0ZUNyZWF0ZWQ9IjIwMjYtMDgtMjhUMTY6NDg6MDciLz4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA8P3hwYWNrZXQgZW5kPSJ3Ij8+AP/iAihJQ0NfUFJPRklMRQABAQAAAhhhcHBsBAAAAG1udHJSR0IgWFlaIAfmAAEAAQAAAAAAAGFjc3BBUFBMAAAAAEFQUEwAAAAAAAAAAAAAAAAAAAAAAAD21gABAAAAANMtYXBwbAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACmRlc2MAAAD8AAAAMGNwcnQAAAEsAAAAUHd0cHQAAAF8AAAAFHJYWVoAAAGQAAAAFGdYWVoAAAGkAAAAFGJYWVoAAAG4AAAAFHJUUkMAAAHMAAAAIGNoYWQAAAHsAAAALGJUUkMAAAHMAAAAIGdUUkMAAAHMAAAAIG1sdWMAAAAAAAAAAQAAAAxlblVTAAAAFAAAABwARABpAHMAcABsAGEAeQAgAFAAM21sdWMAAAAAAAAAAQAAAAxlblVTAAAANAAAABwAQwBvAHAAeQByAGkAZwBoAHQAIABBAHAAcABsAGUAIABJAG4AYwAuACwAIAAyADAAMgAyWFlaIAAAAAAAAPbVAAEAAAAA0yxYWVogAAAAAAAAg98AAD2/////u1hZWiAAAAAAAABKvwAAsTcAAAq5WFlaIAAAAAAAACg4AAARCwAAyLlwYXJhAAAAAAADAAAAAmZmAADypwAADVkAABPQAAAKW3NmMzIAAAAAAAEMQgAABd7///MmAAAHkwAA/ZD///ui///9owAAA9wAAMBu/9sAhAABAQEBAQECAQECAwICAgMEAwMDAwQFBAQEBAQFBgUFBQUFBQYGBgYGBgYGBwcHBwcHCAgICAgJCQkJCQkJCQkJAQEBAQICAgQCAgQJBgUGCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQn/3QAEACj/wAARCAG9AoADASIAAhEBAxEB/8QBogAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoLEAACAQMDAgQDBQUEBAAAAX0BAgMABBEFEiExQQYTUWEHInEUMoGRoQgjQrHBFVLR8CQzYnKCCQoWFxgZGiUmJygpKjQ1Njc4OTpDREVGR0hJSlNUVVZXWFlaY2RlZmdoaWpzdHV2d3h5eoOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4eLj5OXm5+jp6vHy8/T19vf4+foBAAMBAQEBAQEBAQEAAAAAAAABAgMEBQYHCAkKCxEAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD9QKKKK/wHP74CiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP/9D9QKKKK/wHP74CiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP/9H9QKKKK/wHP74CiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP/9L9QKKKK/wHP74CiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP/9P9QKKKK/wHP74CiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP/9T9QKKKK/wHP74CiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKPbp29KAEpajTAj8zselV77ULHTYhPqEyQJ/ekIQfmcCuujgqtWShSi36ImpOMFeT0LlJx0r5V8fftv/ALJXwwaWPxt8QtDtJIPvxJdJPIvbmODe49OQK+LfH3/Bbb9iPwkrR+HL/VfEcqEgx2Nk6I2OnzzmJSPp0r9i4Q+jhx3n9RU8nyivUv2pyt99krHz+O4tyzDfxq8V80fr7SDB6dq/mk+IH/BwTMFeH4XfDkA87JdTvcj2JjhRSPpuP1r4g8f/APBbH9t7xgzR+H7rTPDsR6fY7MM4H+/O0v8AIV/XvBH7J/xize0q2Cjh4/8ATyaX4K58JmnjZkeHfLCfN6I/s647UDkZHSv4EtU/bv8A2uvE3iW18W+JfiBrFzcWc8dxFGbhktw8bBh+5TCY4xjGMdsV/bF+yP8AtD+H/wBqD4C6B8X9BIVr+ALdwf8APG7j+WeP6Bxlf9kivg/pY/QD4q8JMvwuaZvVhWpVny3he0JWuk791s/I9LgXxNwme1Z0KUeWS2Ttqj6MoqZvu1DX8In6UmFFFFAwooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD/9X9QKKKK/wHP74CiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKVRyMcUlOXrQJuy0P5iv8Agsr+2P8AtNfBj9oiy+F3wm8YXvh3RbnRILySKx8uJzK80yMfNCeaBhBwGwK/Azxn8Y/i18RXZvH/AIn1bWt+Nwvb2eZT9VZsfpX6v/8ABdwD/hs3Tx2H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Y3tKF97dGn2PyfxE8IqOc1vrdGXJUt8n6n8F/gX9qj9pP4aaRHoXw/8AHet6TYxcJb215KsSj0Cbto/LjtX3N+wZ+17+0X4p/bP+HunfELxtret6bPqYgltrq8llicSxugBTODgsDj2r+kof8Et/2C/tX21vh1p/mY6Bpguf90SAfpXvnwx/ZT/Zy+Dd2t98NPBekaPcJ0nt7WMTf9/Cpb8iK/oTxv8A2k3hXxDkOMweW8NKOJrwlHncKa5XJWvdJvQ+S4Z8JM8wleFStivdi/hTdj6DwBwpyPyop2VA2qMAcCm1/ho2f0jTvb3gooopGgUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAf/9X9QKKKK/wHP74CiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP/9b9QKKKK/wHP74CiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP/9f9QKKKK/wHP74CiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP/9D9QKKKK/wHP74CiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP/9H9QKKKK/wHP74CiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP/9L9QKKKK/wHP74CiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP/9k=" alt="لۆگۆی PRD.CC"></span>
+
+</div>
+
+
+<div class="profileHero">
+
+<small>
+CONTENT CREATOR
+</small>
+
+<h3>
+
+پزیشکییەکەت
+
+<br>
+
+بە شێوەیەکی جیاواز.
+
+</h3>
+
+</div>
+
+
+<div class="reels">
+
+<div class="reel">
+
+<span class="play">▶</span>
+
+</div>
+
+<div class="reel">
+
+<span class="play">▶</span>
+
+</div>
+
+<div class="reel">
+
+<span class="play">▶</span>
+
+</div>
+
+<div class="reel">
+
+<span class="play">▶</span>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+
+
+<!-- ================= SERVICES ================= -->
+
+<section id="services">
+
+<div class="container">
+
+<div class="sectionHead reveal">
+
+<div class="eyebrow">
+
+خزمەتگوزارییەکانمان
+
+</div>
+
+<h2>
+
+هەموو شتێک بۆ
+
+<span class="gradient">
+براندەکەت
+</span>
+
+</h2>
+
+<p>
+
+لە بیرۆکەوە تا بەرهەمهێنان و گەشەپێدان.
+
+</p>
+
+</div>
+
+
+<div class="services">
+
+<article class="service glass reveal">
+
+<div class="icon">🎥</div>
+
+<h3>
+تۆمارکردن
+</h3>
+
+<p>
+تۆمارکردنی ڤیدیۆی پزیشکی بە کوالێتی بەرز.
+</p>
+
+</article>
+
+
+<article class="service glass reveal">
+
+<div class="icon">✂</div>
+
+<h3>
+ئیدیت و مۆشن گرافیک
+</h3>
+
+<p>
+مۆنتاژ، موشن و ڤیدیۆی سەرنجڕاکێش.
+</p>
+
+</article>
+
+
+<article class="service glass reveal">
+
+<div class="icon">✦</div>
+
+<h3>
+دیزاین و براندینگ
+</h3>
+
+<p>
+دیزاینی پۆست و ناسنامەی دیجیتاڵی.
+</p>
+
+</article>
+
+
+<article class="service glass reveal">
+
+<div class="icon">✎</div>
+
+<h3>
+کاپشن و ستراتیژی
+</h3>
+
+<p>
+هەڵبژاردنی بابەت و نووسینی ناوەڕۆکی گونجاو.
+</p>
+
+</article>
+
+
+<article class="service glass reveal">
+
+<div class="icon">↗</div>
+
+<h3>
+سپۆنسەر و گەشەپێدان
+</h3>
+
+<p>
+سەرپەرشتی سپۆنسەر و چاودێریکردنی ئەنجامەکان.
+</p>
+
+</article>
+
+
+<article class="service glass reveal">
+
+<div class="icon">◎</div>
+
+<h3>
+بەڕێوەبردنی ناوەڕۆک
+</h3>
+
+<p>
+پلاندانان و ڕێکخستنی تقویمی ناوەڕۆک.
+</p>
+
+</article>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= PORTFOLIO ================= -->
+
+<section id="portfolio">
+
+<div class="container">
+
+<div class="sectionHead reveal">
+
+<div class="eyebrow">
+نمونەی کار
+</div>
+
+<h2>
+
+هەر ناوەڕۆکێک
+
+<span class="gradient">
+مەبەستی هەیە.
+</span>
+
+</h2>
+
+<p>
+ڤیدیۆ، براندینگ و دیزاینی سۆشیال میدیا.
+</p>
+
+</div>
+
+
+<div class="portfolio">
+
+<article class="work glass reveal">
+
+<div class="workArt">
+
+<div class="workText">
+
+MEDICAL
+
+<br>
+
+REELS
+
+</div>
+
+</div>
+
+<div class="workInfo">
+
+<b>
+Medical Reels
+</b>
+
+<span>
+ڤیدیۆ + موشن
+</span>
+
+</div>
+
+</article>
+
+
+<article class="work glass reveal">
+
+<div class="workArt">
+
+<div class="workText">
+
+BRAND
+
+<br>
+
+IDENTITY
+
+</div>
+
+</div>
+
+<div class="workInfo">
+
+<b>
+Branding
+</b>
+
+<span>
+ناسنامەی براند
+</span>
+
+</div>
+
+</article>
+
+
+<article class="work glass reveal">
+
+<div class="workArt">
+
+<div class="workText">
+
+SOCIAL
+
+<br>
+
+DESIGN
+
+</div>
+
+</div>
+
+<div class="workInfo">
+
+<b>
+Social Media
+</b>
+
+<span>
+پۆست و ناسنامەی دیجیتاڵی
+</span>
+
+</div>
+
+</article>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= PACKAGES ================= -->
+
+<section id="packages">
+
+<div class="container">
+
+<div class="sectionHead reveal">
+
+<div class="eyebrow">
+ئۆفەرە مانگانەکان
+</div>
+
+<h2>
+
+ئۆفەرێک هەڵبژێرە
+
+<span class="gradient">
+کە لەگەڵت بگەشێت.
+</span>
+
+</h2>
+
+<p>
+پلانەکانمان بۆ پێداویستی دکتۆر و کلینیکەکان ڕێکخراون.
+</p>
+
+</div>
+
+
+<div class="packages">
+
+
+<!-- BASIC -->
+
+<article class="package glass reveal">
+
+<h3>
+ئۆفەری سەرەتایی
+</h3>
+
+<div class="subtitle">
+
+مانگانە / بۆ دەستپێکێکی دروست
+
+</div>
+
+<ul>
+
+<li>
+<span class="check">✓</span>
+سێ ڤیدیۆ تۆمارکردن
+</li>
+
+<li>
+<span class="check">✓</span>
+ئیدیتکردنی ڤیدیۆکان
+</li>
+
+<li>
+<span class="check">✓</span>
+دیزاینی سێ پۆست + عەرەبی
+</li>
+
+<li>
+<span class="check">✓</span>
+دروستکردنی لۆگۆ
+</li>
+
+<li>
+<span class="check">✓</span>
+نووسینی کاپشنی پۆستەکان
+</li>
+
+</ul>
+
+<a
+class="btn btnGold"
+href="https://wa.me/9647729628611"
+target="_blank">
+
+پرسیاری زیاتر
+
+</a>
+
+</article>
+
+
+<!-- GROWTH -->
+
+<article class="package glass featured reveal">
+
+<span class="badge">
+پێشنیارکراو
+</span>
+
+<h3>
+ئۆفەری گەشەسەندوو
+</h3>
+
+<div class="subtitle">
+
+مانگانە / بۆ فراوانکردن و کارلێکی زیاتر
+
+</div>
+
+<ul>
+
+<li><span class="check">✓</span> چوار ڤیدیۆ تۆمارکردن</li>
+
+<li><span class="check">✓</span> ڕێکخستنی ڕوناکی ڤیدیۆکان</li>
+
+<li><span class="check">✓</span> ئیدیتکردنی ڤیدیۆکان</li>
+
+<li><span class="check">✓</span> دیزاینی چوار پۆست + عەرەبی</li>
+
+<li><span class="check">✓</span> دروستکردنی لۆگۆ</li>
+
+<li><span class="check">✓</span> براندینگ</li>
+
+<li><span class="check">✓</span> نووسینی کاپشنی پۆستەکان</li>
+
+<li><span class="check">✓</span> سەرپەرشتی سپۆنسەر</li>
+
+</ul>
+
+<a
+class="btn btnGold"
+href="https://wa.me/9647729628611"
+target="_blank">
+
+دەستپێکردن
+
+</a>
+
+</article>
+
+
+<!-- ADVANCED -->
+
+<article class="package glass reveal">
+
+<h3>
+ئۆفەری پێشکەوتوو
+</h3>
+
+<div class="subtitle">
+
+مانگانە / تەواوترین خزمەتگوزاری نەشتەرگەری
+
+</div>
+
+<ul>
+
+<li><span class="check">✓</span> پێنج ڤیدیۆ تۆمارکردن</li>
+
+<li><span class="check">✓</span> ڕێکخستنی ڕوناکی ڤیدیۆکان</li>
+
+<li><span class="check">✓</span> ئیدیتکردن + مۆشن گرافیک</li>
+
+<li><span class="check">✓</span> دیزاینی پێنج پۆست + عەرەبی</li>
+
+<li><span class="check">✓</span> دروستکردنی لۆگۆ</li>
+
+<li><span class="check">✓</span> براندینگی تایبەت</li>
+
+<li><span class="check">✓</span> نووسینی کاپشن و هەڵبژاردنی ناوەڕۆک</li>
+
+<li><span class="check">✓</span> ڤیدیۆ لە ژووری نەشتەرگەری و کەیسی دەگمەن</li>
+
+<li><span class="check">✓</span> هاوبەشی پۆست لەگەڵ پەیجی mr nurse</li>
+
+<li><span class="check">✓</span> سەرپەرشتی سپۆنسەر و ڕاپۆرتی مانگانە</li>
+
+</ul>
+
+<a
+class="btn btnGold"
+href="https://wa.me/9647729628611"
+target="_blank">
+
+گفتوگۆ بکە
+
+</a>
+
+</article>
+
+</div>
+
+
+<div class="note">
+
+تێبینی: بودجەی تەرخانکراو بۆ سپۆنسەرکردن جیایە لە بودجەی مانگانە.
+
+</div>
+
+<div class="extraOffers glass reveal" style="margin-top:28px;padding:28px;border-radius:24px;">
+<h3>ئۆفەرە جیاوازەکان</h3>
+<p style="color:var(--muted);margin:8px 0 16px;">ئەم خزمەتگوزارییە بە بودجەیەکی جیاواز بۆ دکتۆر، کلینیک و دەرمانخانەکان بەردەستە؛ بەشداربووان دەتوانن بە دڵی خۆیان هەریەک لەمانە هەڵبژێرن یان نەیەنجێنن.</p>
+<ul>
+<li><span class="check">✓</span> دروستکردنی وێبسایت و بەڕێوەبردنی</li>
+<li><span class="check">✓</span> دیزاینی بزنس کارد</li>
+<li><span class="check">✓</span> سپۆنسەرکردن</li>
+<li><span class="check">✓</span> سیستەمی نۆرەگرتنی ئەلیکترۆنی</li>
+</ul>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= PROCESS ================= -->
+
+<section id="process">
+
+<div class="container">
+
+<div class="sectionHead reveal">
+
+<div class="eyebrow">
+پرۆسەی کار
+</div>
+
+<h2>
+
+لە بیرۆکەوە تا
+
+<span class="gradient">
+ئەنجام.
+</span>
+
+</h2>
+
+</div>
+
+
+<div class="process">
+
+<div class="step glass reveal">
+
+<span class="number">
+01 — گفتوگۆ
+</span>
+
+<h3>
+ئامانجەکەت دەزانین
+</h3>
+
+<p>
+بوار و ئامانجی براندەکەت دەزانین.
+</p>
+
+</div>
+
+
+<div class="step glass reveal">
+
+<span class="number">
+02 — پلان
+</span>
+
+<h3>
+ستراتیژی دادەنێین
+</h3>
+
+<p>
+بابەت و بیرۆکەی ناوەڕۆک دیاری دەکەین.
+</p>
+
+</div>
+
+
+<div class="step glass reveal">
+
+<span class="number">
+03 — بەرهەمهێنان
+</span>
+
+<h3>
+تۆمار و ئیدیت
+</h3>
+
+<p>
+ڤیدیۆ، دیزاین و موشن جێبەجێ دەکەین.
+</p>
+
+</div>
+
+
+<div class="step glass reveal">
+
+<span class="number">
+04 — گەشە
+</span>
+
+<h3>
+بڵاودەکەینەوە
+</h3>
+
+<p>
+ئەنجامەکان چاودێری و ڕاپۆرت دەکەین.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= TESTIMONIALS ================= -->
+
+<section>
+
+<div class="container">
+
+<div class="sectionHead reveal">
+
+<div class="eyebrow">
+ڕای کڕیار
+</div>
+
+<h2>
+
+هاوبەشەکانمان چی
+
+<span class="gradient">
+دەڵێن؟
+</span>
+
+</h2>
+
+</div>
+
+
+<div class="testimonials">
+
+
+<div class="quote glass reveal">
+
+<div class="stars">
+★★★★★
+</div>
+
+<p>
+
+«پرد توانای ئەوەی هەیە زانیارییە پزیشکییەکان بە شێوەیەکی سادە و سەرنجڕاکێش بگەیەنێت.»
+
+</p>
+
+<div class="person">
+
+<div class="avatar">
+د
+</div>
+
+<div>
+
+<b>
+دکتۆر
+</b>
+
+<small>
+هاوبەشی پرد
+</small>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="quote glass reveal">
+
+<div class="stars">
+★★★★★
+</div>
+
+<p>
+
+«هەموو شتێک لە یەک شوێن ڕێکدەخرێت؛ لە بیرۆکەوە تا ڤیدیۆ و بڵاوکردنەوە.»
+
+</p>
+
+<div class="person">
+
+<div class="avatar">
+ک
+</div>
+
+<div>
+
+<b>
+کلینیک
+</b>
+
+<small>
+هاوبەشی پرد
+</small>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= CTA ================= -->
+
+<section id="contact">
+
+<div class="container">
+
+<div class="cta reveal">
+
+<div>
+
+<h2>
+
+ئامادەیت براندە پزیشکییەکەت
+
+<span class="gradient">
+بگەشێنیت؟
+</span>
+
+</h2>
+
+<p>
+
+ئێستا پەیوەندیمان پێوە بکە و با پڕۆژەکەت دەست پێ بکەین.
+
+</p>
+
+</div>
+
+
+<a
+class="btn btnGold"
+href="https://wa.me/9647729628611?text=سڵاو%20پرد،%20دەمەوێ%20لەسەر%20خزمەتگوزارییەکانتان%20گفتوگۆ%20بکەم."
+target="_blank">
+
+💬
+
+<span dir="ltr">
+07729628611
+</span>
+
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+<div class="container">
+
+<div class="footerGrid">
+
+<div class="footerBrand">
+
+<div class="logo">
+
+<span class="logoMark">
+پ
+</span>
+
+پرد
+
+</div>
+
+<p>
+
+PRD.CC — ستافی دروستکردنی ناوەڕۆکی پزیشکی بۆ دکتۆرەکان، کلینیکەکان و دەرمانخانەکان.
+
+</p>
+
+<div class="socials">
+
+<a
+href="https://www.instagram.com/prd.cc/"
+target="_blank">
+
+◎
+
+</a>
+
+<a
+href="https://wa.me/9647729628611"
+target="_blank">
+
+◔
+
+</a>
+
+</div>
+
+</div>
+
+
+<div class="footerLinks">
+
+<a href="#services">
+خزمەتگوزاری
+</a>
+
+<a href="#portfolio">
+نمونەی کار
+</a>
+
+<a href="#packages">
+ئۆفەرەکان
+</a>
+
+<a href="#contact">
+پەیوەندی
+</a>
+
+</div>
+
+</div>
+
+
+<div class="copy">
+
+© 2026 PRD.CC — پرد. هەموو مافەکان پارێزراون.
+
+</div>
+
+</div>
+
+</footer>
+
+
+<script>
+
+/* ================= DARK / LIGHT ================= */
+
+const theme =
+document.getElementById("theme");
+
+const saved =
+localStorage.getItem("prd-theme");
+
+if(saved === "light"){
+
+  document.body.classList.add("light");
+
+  theme.textContent="☾";
+
+}
+
+theme.addEventListener("click",()=>{
+
+  document.body.classList.toggle("light");
+
+  const light =
+    document.body.classList.contains("light");
+
+  localStorage.setItem(
+    "prd-theme",
+    light ? "light" : "dark"
+  );
+
+  theme.textContent =
+    light ? "☾" : "☀";
+
+});
+
+
+/* ================= SCROLL ANIMATION ================= */
+
+const observer =
+new IntersectionObserver(
+(entries)=>{
+
+entries.forEach(
+(entry)=>{
+
+if(entry.isIntersecting){
+
+entry.target.classList.add("show");
+
+}
+
+});
+
+},
+{
+threshold:.12
+}
+);
+
+document
+.querySelectorAll(".reveal")
+.forEach(
+(el)=>observer.observe(el)
+);
+
+</script>
 
 </body>
 </html>
