@@ -28,7 +28,7 @@
         }
 
         body {
-            background-color: var(--bg-color);
+            background-color: var(--bg-color) !important;
             color: var(--text-dark);
             line-height: 1.7;
         }
@@ -52,12 +52,12 @@
             font-size: 1.6rem;
             font-weight: 800;
             letter-spacing: 0.5px;
-            color: white;
+            color: white !important;
             text-decoration: none;
         }
         
         .logo span {
-            color: var(--secondary);
+            color: var(--secondary) !important;
         }
 
         .nav-links button {
@@ -113,8 +113,8 @@
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-            color: white;
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%) !important;
+            color: white !important;
             border: none;
             padding: 0.8rem 1.8rem;
             border-radius: 10px;
@@ -138,7 +138,7 @@
         }
 
         .client-card {
-            background: var(--card-bg);
+            background: var(--card-bg) !important;
             border-radius: 16px;
             padding: 2rem;
             box-shadow: 0 10px 30px rgba(0,0,0,0.04);
@@ -160,7 +160,7 @@
             left: 0;
             width: 100%;
             height: 4px;
-            background: linear-gradient(90deg, var(--gold), #fbbf24);
+            background: linear-gradient(90deg, var(--gold), #fbbf24) !important;
         }
 
         .client-header {
@@ -173,8 +173,8 @@
             width: 55px;
             height: 55px;
             border-radius: 14px;
-            background: #f8fafc;
-            color: var(--primary);
+            background: #f8fafc !important;
+            color: var(--primary) !important;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -186,20 +186,20 @@
 
         .client-info h3 {
             font-size: 1.3rem;
-            color: var(--primary);
+            color: var(--primary) !important;
             font-weight: 700;
         }
 
         .client-info p {
-            color: var(--text-light);
+            color: var(--text-light) !important;
             font-size: 0.9rem;
             margin-top: 0.2rem;
         }
 
         .package-badge {
             display: inline-block;
-            background-color: #fffbeb;
-            color: var(--gold);
+            background-color: #fffbeb !important;
+            color: var(--gold) !important;
             padding: 0.4rem 1rem;
             border-radius: 8px;
             font-size: 0.9rem;
@@ -219,14 +219,14 @@
 
         .progress-track {
             height: 8px;
-            background-color: #f1f5f9;
+            background-color: #f1f5f9 !important;
             border-radius: 10px;
             overflow: hidden;
         }
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, var(--accent), #34d399);
+            background: linear-gradient(90deg, var(--accent), #34d399) !important;
             border-radius: 10px;
             transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
         }
@@ -272,7 +272,7 @@
         .modal.active { display: flex; }
 
         .modal-content {
-            background: white;
+            background: white !important;
             padding: 2.5rem;
             border-radius: 20px;
             width: 100%;
@@ -328,13 +328,13 @@
 
         /* Client Demo VIP Portal */
         .portal-card {
-            background: white;
+            background: white !important;
             border-radius: 24px;
             padding: 3.5rem;
             box-shadow: 0 20px 40px rgba(0,0,0,0.06);
             max-width: 900px;
             margin: 0 auto;
-            border-top: 6px solid var(--gold);
+            border-top: 6px solid var(--gold) !important;
         }
         
         .task-list {
@@ -350,11 +350,11 @@
             border: 1px solid var(--border-color);
             border-radius: 12px;
             margin-bottom: 1rem;
-            background: #fafafa;
+            background: #fafafa !important;
             transition: background 0.2s;
         }
         
-        .task-item:hover { background: white; box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
+        .task-item:hover { background: white !important; box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
         
         .task-status {
             font-size: 0.85rem;
@@ -363,16 +363,16 @@
             font-weight: 600;
         }
         
-        .status-done { background: #dcfce7; color: #166534; }
-        .status-wait { background: #fef3c7; color: #92400e; }
-        .status-action { background: #dbeafe; color: #1e40af; }
+        .status-done { background: #dcfce7 !important; color: #166534 !important; }
+        .status-wait { background: #fef3c7 !important; color: #92400e !important; }
+        .status-action { background: #dbeafe !important; color: #1e40af !important; }
 
         .btn-whatsapp {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            background: #25D366;
-            color: white;
+            background: #25D366 !important;
+            color: white !important;
             padding: 1rem 2.5rem;
             border-radius: 12px;
             text-decoration: none;
@@ -447,7 +447,7 @@
                         </div>
                     </div>
                     
-                    <div class="package-badge" style="color: #0369a1; background: #e0f2fe; border-color: #bae6fd;">🚀 ئۆفەری گەشەسەندوو</div>
+                    <div class="package-badge" style="color: #0369a1 !important; background: #e0f2fe !important; border-color: #bae6fd !important;">🚀 ئۆفەری گەشەسەندوو</div>
                     
                     <div style="margin: 1.5rem 0;">
                         <div class="progress-header">
@@ -455,7 +455,7 @@
                             <span style="color: #0ea5e9;">٤٥٪</span>
                         </div>
                         <div class="progress-track">
-                            <div class="progress-fill" style="width: 45%; background: linear-gradient(90deg, #3b82f6, #60a5fa);"></div>
+                            <div class="progress-fill" style="width: 45%; background: linear-gradient(90deg, #3b82f6, #60a5fa) !important;"></div>
                         </div>
                     </div>
 
@@ -561,7 +561,7 @@
                         <option value="ئەیلول">ئەیلول (٩)</option>
                         <option value="تشرینی یەکەم">تشرینی یەکەم (١٠)</option>
                         <option value="تشرینی دووەم">تشرینی دووەم (١١)</option>
-                        <option value="کانوونی یەکەم">کانوونی یەکەم (١2)</option>
+                        <option value="کانوونی یەکەم">کانوونی یەکەم (١٢)</option>
                     </select>
                 </div>
 
@@ -603,7 +603,7 @@
         function copyClientLink(clientId) {
             const link = `https://prd.cc/portal/${clientId}`;
             navigator.clipboard.writeText(link);
-            alert(`لینکەکە کۆپی کرا بۆ کڕیار:\n${link}`);
+            alert(`لینکەکە کۆپی کرا بۆ کڕیار:\\n${link}`);
         }
         
         window.onclick = function(event) {
